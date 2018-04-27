@@ -1,0 +1,12 @@
+{
+  "presets": [
+    ["env", {
+      "targets": {
+        "browsers": ["ie 10", "safari >= 7"]
+      },
+      "modules": false,
+      "useBuiltIns": true
+    }]
+  ],
+  "plugins": ["syntax-dynamic-import"]
+}
