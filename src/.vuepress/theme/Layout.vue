@@ -1,12 +1,11 @@
 <template lang='pug'>
-  div
-    .theme-container()
-      .custom-layout(v-if="$page.frontmatter.layout")
-        component(:is="$page.frontmatter.layout")
-      Home(v-else-if="$page.frontmatter.home")
-      Page(v-else)
-        slot(name="page-top" slot="top")
-        slot(name="page-bottom" slot="bottom")
+  .theme-container(:class="pageClasses")
+    .custom-layout(v-if="$page.frontmatter.layout")
+      component(:is="$page.frontmatter.layout")
+    Home(v-else-if="$page.frontmatter.home")
+    Page(v-else)
+      slot(name="page-top" slot="top")
+      slot(name="page-bottom" slot="bottom")
 </template>
 
 <script>

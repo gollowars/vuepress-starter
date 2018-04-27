@@ -12,6 +12,7 @@ meta:
  -
   og:image: '//absolute-domain/thisog.jpg'
 
+pageClass: 'home-class'
 heroText: Hello VuePress
 tagline: this is a tagline
 footer: hear is footer area
