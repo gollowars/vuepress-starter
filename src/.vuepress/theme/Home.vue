@@ -4,22 +4,14 @@
       img(v-if="data.heroImage" :src="$withBase(data.heroImage)" alt="hero")
       h1 {{ data.heroText || $title || 'Hello'}}
       p.description {{ data.tagline || $description || 'Welcome to your VuePress site' }}
-      p.action(v-if="data.actionText && data.actionLink")
-        NavLink(class="action-button" :item="actionLink")
-    .features(v-if="data.features && data.features.length")
-      .feature(v-for="feature in data.features")
-        h2 {{ feature.title }}
-        p {{ feature.details }}
     Content(custom)
     .footer(v-if="data.footer") {{ data.footer }}
 
 </template>
 
 <script>
-import NavLink from './NavLink.vue'
 
 export default {
-  components: { NavLink },
   created () {
     // console.log('this.$site.themeConfig:',this.$site.themeConfig)
     console.log(this.$page)

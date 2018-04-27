@@ -13,9 +13,7 @@ import "babel-polyfill"
 import Vue from 'vue'
 import nprogress from 'nprogress'
 import Home from './Home.vue'
-import Navbar from './Navbar.vue'
 import Page from './Page.vue'
-import Sidebar from './Sidebar.vue'
 import { pathToComponentName } from '@app/util'
 import { resolveSidebarItems } from './util'
 
