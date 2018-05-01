@@ -21,6 +21,8 @@
     "vuepress": "^0.8.4"
   },
   "dependencies": {
-    "babel-polyfill": "^6.26.0"
+    "babel-polyfill": "^6.26.0",
+    "rxjs": "^6.0.0",
+    "three": "^0.92.0"
   }
 }

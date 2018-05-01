@@ -37,6 +37,7 @@ export default {
   padding $navbarHeight 2rem 0
   max-width 960px
   margin 0px auto
+  color: #fff
   .hero
     text-align center
     img
@@ -51,7 +52,7 @@ export default {
       max-width 35rem
       font-size 1.6rem
       line-height 1.3
-      color lighten($textColor, 40%)
+      color lighten(#fff, 40%)
     .action-button
       display inline-block
       font-size 1.2rem
@@ -82,14 +83,14 @@ export default {
       font-weight 500
       border-bottom none
       padding-bottom 0
-      color lighten($textColor, 10%)
+      color lighten(#fff, 10%)
     p
-      color lighten($textColor, 25%)
+      color lighten(#fff, 25%)
   .footer
     padding 2.5rem
     border-top 1px solid $borderColor
     text-align center
-    color lighten($textColor, 25%)
+    color lighten(#fff, 25%)
 
 @media (max-width: $MQMobile)
   .home
