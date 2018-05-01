@@ -26,8 +26,9 @@ class Base2dScene {
     this.setSize()
     this.scene = new Scene()
     this.scene.background = 0x000000
-    // this.camera = new PerspectiveCamera(75, this.width / this.height, 0.1, 1000)
-    this.camera = new OrthographicCamera(this.width / - 2, this.width / 2, this.height / 2, this.height / - 2, 1, 1000);
+    this.camera = new PerspectiveCamera(75, this.width / this.height, 0.1, 1000)
+    // this.camera = new OrthographicCamera(this.width / - 2, this.width / 2, this.height / 2, this.height / - 2, 1, 10000);
+    this.camera.position.z = 1000
 
     this.renderer = new WebGLRenderer({
       canvas: this.node,
@@ -52,9 +53,6 @@ class Base2dScene {
   resize() {
     this.setSize()
 
-    this.plane.scale.x = this.width
-    this.plane.scale.y = this.height
-
     this.renderer.setPixelRatio(window.devicePixelRatio || 1)
     this.renderer.setSize(this.width, this.height)
 
@@ -63,6 +61,8 @@ class Base2dScene {
     this.camera.top = this.height / 2
     this.camera.bottom = this.height / -2
     this.camera.updateProjectionMatrix()
+
+    this.resizeUpdate()
   }
 
   start() {
@@ -100,6 +100,7 @@ class Base2dScene {
   setup() {}
   didStart() {}
   update() {}
+  resizeUpdate() {}
 
 }
 
