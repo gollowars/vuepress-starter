@@ -18,7 +18,4 @@ tagline: this is a tagline
 footer: hear is footer area
 ---
 # Hello VuePress Memo
- - Asset Handler
- - Links anchor
- - Code
- - header tag, meta tag
+[about](/about/)

@@ -7,3 +7,5 @@ body:
 ---
 # About Page
 about page dayo
+# Hello VuePress Memo
+[Home](/)
