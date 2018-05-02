@@ -53,6 +53,7 @@ class Base2dScene {
     this.updateCamera()
     this.resizeUpdate()
   }
+
   updateRenderer() {
     this.renderer.setPixelRatio(window.devicePixelRatio || 1)
     this.renderer.setSize(this.width, this.height)
