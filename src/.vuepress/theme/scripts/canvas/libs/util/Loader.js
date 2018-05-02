@@ -1,6 +1,7 @@
 import {
   LoadingManager,
   TextureLoader,
+  LinearFilter
 } from 'three'
 
 class Loader {
@@ -32,8 +33,12 @@ class Loader {
     })
   }
 
+  get(key) {
+    return this.textures[key]
+  }
+
   onProgress(url, itemsLoaded, itemsTotal) {
-    console.log('Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
+    // console.log('Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
   }
   onError(url) {
     new Error('Cannot load ' + url)

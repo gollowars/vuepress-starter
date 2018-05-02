@@ -21,7 +21,7 @@ export default {
         if(value)this.pageCanvasExec()
       })
     }else {
-        this.pageCanvasExec()
+      this.pageCanvasExec()
     }
   },
   methods: {

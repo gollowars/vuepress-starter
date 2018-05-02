@@ -7,10 +7,11 @@ import {
 
 import Data from '../../store/Data'
 
-class FilterMapRenderScene extends Scene {
+export default class FilterMapRenderScene extends Scene {
   constructor() {
     super()
     this.renderTarget = null
+    this.init()
   }
 
   init() {

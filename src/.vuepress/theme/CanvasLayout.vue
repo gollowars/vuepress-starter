@@ -67,7 +67,8 @@ export default {
       const parentNode = this.$refs['wrapper']
       const canvasScene = new CanvasScene({
         node: canvasNode,
-        parentNode: parentNode
+        parentNode: parentNode,
+        loader: Loader
       })
       await canvasScene.init()
       canvasScene.start()

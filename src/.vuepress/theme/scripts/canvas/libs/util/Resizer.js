@@ -1,5 +1,16 @@
 import { fromEvent } from 'rxjs'
 
+export function resizeCover(objW,objH,screenW,screenH){
+  const wi = objW
+  const hi = objH
+  const ws = screenW
+  const hs = screenH
+  const ri = wi / hi
+  const rs = ws / hs
+  const resize = rs > ri ? { width: ws, height: hi * ws / wi } : { width: wi * hs / hi, height: hs }
+  return resize
+}
+
 class Resizer {
   constructor() {
     this.resizeEvents = {}
