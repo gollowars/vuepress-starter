@@ -18,6 +18,9 @@ class Base2dScene {
     if (Detector.webgl) {
       this.setSize()
       this.createScene()
+      this.createCamera()
+      this.createRenderer()
+      this.setup()
     } else {
       console.log('cannot use webgl')
     }
@@ -25,6 +28,14 @@ class Base2dScene {
 
   createScene() {
     this.scene = new Scene()
+  }
+
+  createRenderer() {
+    this.renderer.setPixelRatio(window.devicePixelRatio || 1)
+    this.renderer.setSize(this.width, this.height)
+  }
+
+  createCamera() {
     this.camera = new PerspectiveCamera(45, this.width / this.height, 0.1, 50000)
     this.camera.position.z = this.height / Math.tan(this.camera.fov * Math.PI / 360) / 2
     this.renderer = new WebGLRenderer({
@@ -35,9 +46,6 @@ class Base2dScene {
       depth: false,
       premultipliedAlpha: true
     })
-    this.renderer.setPixelRatio(window.devicePixelRatio || 1)
-    this.renderer.setSize(this.width, this.height)
-    this.setup()
   }
 
   setSize() {

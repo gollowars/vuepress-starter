@@ -1,11 +1,17 @@
 import { Scene, PerspectiveCamera, OrthographicCamera, WebGLRenderer, PlaneGeometry, BoxGeometry, MeshBasicMaterial, Mesh, Vector3 } from 'three'
 import Base3dScene from './Base3DScene'
+import Params from './Params'
 
 class CanvasScene extends Base3dScene{
   setup() {
-    this.scene.background = 0x000000
+    Params.add({
+      amp: {value: 10, min: 1, max: 30}
+    })
 
+    this.scene.background = 0x000000
     this.geometry = new PlaneGeometry(1, 1, 1, 100)
+
+    this.renderer.extensions.get('OES_texture_float')
 
     let material = new MeshBasicMaterial({ color: 0xffff00, wireframe: true })
     this.plane = new Mesh(this.geometry, material)
@@ -17,16 +23,17 @@ class CanvasScene extends Base3dScene{
   }
 
   update() {
-    // for (let i = 0; i < this.geometry.vertices.length/2; i++) {
-    //   this.geometry.vertices[2 * i].z = Math.pow(2, i / 10)
-    //   this.geometry.vertices[2 * i + 1].z = Math.pow(2, i / 10)
-    // }
+    for (let i = 0; i < this.geometry.vertices.length/2; i++) {
+      this.geometry.vertices[2 * i].z = Math.pow(2, i / 10)
+      this.geometry.vertices[2 * i + 1].z = Math.pow(2, i / 10)
+    }
 
-    // this.plane.rotation.y += Math.PI/180*1
+    // console.log(Params.get('plane').amp.value)
+    // this.plane.rotation.y += Math.PI / 180
   }
   resizeUpdate(){
-    this.plane.scale.x = this.width
-    this.plane.scale.y = this.height
+    this.plane.scale.x = this.width / 2
+    this.plane.scale.y = this.height / 2
   }
 }
 
