@@ -1,12 +1,15 @@
 import { Scene, PerspectiveCamera, OrthographicCamera, WebGLRenderer, PlaneGeometry, BoxGeometry, MeshBasicMaterial, Mesh, Vector3 } from 'three'
 import Base3dScene from './Base3DScene'
 import Params from './Params'
+import Data from './Data'
 
 class CanvasScene extends Base3dScene{
   setup() {
     Params.add({
       amp: {value: 10, min: 1, max: 30}
     })
+
+    console.log(Data.isMobile)
 
     this.scene.background = 0x000000
     this.geometry = new PlaneGeometry(1, 1, 1, 100)

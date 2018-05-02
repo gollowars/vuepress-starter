@@ -1,6 +1,5 @@
 import { Scene, PerspectiveCamera, OrthographicCamera, WebGLRenderer, PlaneGeometry, BoxGeometry, MeshBasicMaterial, Mesh, Vector3 } from 'three'
 import Detector from 'three/examples/js/Detector'
-
 import { fromEvent } from 'rxjs'
 
 class Base2dScene {
