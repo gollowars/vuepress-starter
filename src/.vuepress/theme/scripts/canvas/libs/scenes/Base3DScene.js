@@ -1,24 +1,31 @@
-import { Scene, PerspectiveCamera, OrthographicCamera, WebGLRenderer, PlaneGeometry, BoxGeometry, MeshBasicMaterial, Mesh, Vector3 } from 'three'
-import Detector from 'three/examples/js/Detector'
-import { fromEvent } from 'rxjs'
+import { Scene, PerspectiveCamera, OrthographicCamera, WebGLRenderer, PlaneGeometry, BoxGeometry, MeshBasicMaterial, Mesh, Vector3, GridHelper, AxisHelper, DirectionalLightHelper } from 'three'
+import Resizer from '../util/Resizer'
+import Config from '../../store/Config'
+import Data from '../../store/Data'
+import Params from '../util/Params'
 
-class Base2dScene {
+class Base3dScene {
   constructor(props) {
+    Data.init()
+
     this.params = Object.assign({}, props);
     this.node = this.params.node
     this.parentNode = this.params.parentNode
-
     this.baseUpdate = this.baseUpdate.bind(this)
     this.resize = this.resize.bind(this)
-    this.init()
   }
 
-  init() {
+  async init() {
+    const Detector = await import('three/examples/js/Detector')
+    await Params.init()
     if (Detector.webgl) {
       this.setSize()
       this.createScene()
       this.createCamera()
       this.createRenderer()
+      if (Config.SHOW_HELPER) {
+        this.addHelper()
+      }
       this.setup()
     } else {
       console.log('cannot use webgl')
@@ -48,8 +55,10 @@ class Base2dScene {
   }
 
   setSize() {
-    this.width = this.parentNode.clientWidth
-    this.height = this.parentNode.clientHeight
+    Data.canvas.width = this.parentNode.clientWidth
+    Data.canvas.height = this.parentNode.clientHeight
+    this.width = Data.canvas.width
+    this.height = Data.canvas.height
     this.node.width = this.width
     this.node.height = this.height
   }
@@ -67,7 +76,6 @@ class Base2dScene {
   }
   updateCamera() {
     this.camera.aspect = this.width / this.height
-    this.camera.updateProjectionMatrix()
     this.camera.position.z = this.height / Math.tan(this.camera.fov * Math.PI / 360) / 2
     this.camera.updateProjectionMatrix()
   }
@@ -77,8 +85,8 @@ class Base2dScene {
     this.baseUpdate()
     this.didStart()
 
-    this.resizeSubscription = fromEvent(window, 'resize')
-      .subscribe(this.resize)
+    Resizer.start()
+    Resizer.add('sceneResize', this.resize)
   }
 
   baseUpdate() {
@@ -87,8 +95,18 @@ class Base2dScene {
     this.render()
   }
 
+  addHelper() {
+    this.helper = {}
+    this.helper.grid = new GridHelper(1000, 50)
+    this.scene.add(this.helper.grid)
+    this.helper.axis = new AxisHelper(1000, 50)
+    this.scene.add(this.helper.axis)
+    // this.helper.light = new DirectionalLightHelper(this.light, 20)
+    // this.scene.add(this.helper.light)
+  }
+
   dispose() {
-    this.resizeSubscription.unsubscribe()
+
   }
 
   render() {
@@ -111,4 +129,4 @@ class Base2dScene {
 
 }
 
-export default Base2dScene
+export default Base3dScene

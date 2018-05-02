@@ -17,18 +17,20 @@ export default {
     return {}
   },
   created() {
-
   },
   beforeMount() {
 
   },
-  mounted() {
+  async mounted() {
     const canvasNode = this.$refs['canvas']
     const parentNode = this.$refs['wrapper']
     const canvasScene = new CanvasScene({
       node: canvasNode,
       parentNode: parentNode
     })
+    console.log('wait!!')
+    await canvasScene.init()
+    console.log('end wait!')
     canvasScene.start()
   },
   methods: {

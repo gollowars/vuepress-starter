@@ -1,16 +1,20 @@
-import dat from 'dat-gui'
+import Config from '../../store/Config'
 
 class Params {
   constructor() {
     this.objList = {}
-    this.init()
   }
 
-  init() {
+  async init() {
+    const dat = await import('dat-gui')
     this.gui = new dat.GUI()
+    if(!Config.SHOW_PARAMS) {
+      this.gui.domElement.remove()
+    }
   }
 
   add(obj,folder){
+    if (!Config.SHOW_PARAMS) return
     const gui = (folder) ? this.gui.addFolder(folder): this.gui
     if(folder) gui.open()
 
