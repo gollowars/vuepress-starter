@@ -4,8 +4,9 @@
 </template>
 
 <script>
-
+import { BehaviorSubject } from 'rxjs'
 import CanvasScene from './scripts/canvas/'
+import Loader from './scripts/canvas/libs/util/Loader'
 
 export default {
   props: {
@@ -14,26 +15,43 @@ export default {
     }
   },
   data () {
-    return {}
+    return {
+      loading: true,
+      setupCount: 0,
+      setupFinishCount: 2
+    }
   },
   created() {
-  },
-  beforeMount() {
-
-  },
-  async mounted() {
-    const canvasNode = this.$refs['canvas']
-    const parentNode = this.$refs['wrapper']
-    const canvasScene = new CanvasScene({
-      node: canvasNode,
-      parentNode: parentNode
+    this.setupSubject = new BehaviorSubject(this.setupCount)
+    this.setupSubject.subscribe((value)=>{
+      if(value >= this.setupFinishCount) {
+        this.createCanvas()
+      }
     })
-    console.log('wait!!')
-    await canvasScene.init()
-    console.log('end wait!')
-    canvasScene.start()
+    this.startLoad()
   },
+
+  async mounted() {
+    this.setupSubject.next(++this.setupCount)
+  },
+
   methods: {
+    async startLoad() {
+      Loader.add('/assets/raw/image1.jpg')
+      await Loader.load()
+      this.setupSubject.next(++this.setupCount)
+    },
+
+    async createCanvas() {
+      const canvasNode = this.$refs['canvas']
+      const parentNode = this.$refs['wrapper']
+      const canvasScene = new CanvasScene({
+        node: canvasNode,
+        parentNode: parentNode
+      })
+      await canvasScene.init()
+      canvasScene.start()
+    }
   },
   computed: {
   }
