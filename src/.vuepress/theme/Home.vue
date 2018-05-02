@@ -12,9 +12,24 @@
 <script>
 
 export default {
+  inject: ['provider'],
   created () {
-    // console.log('this.$site.themeConfig:',this.$site.themeConfig)
-    console.log(this.$page)
+  },
+  mounted() {
+    if(!this.provider.created.value) {
+      this.provider.created.subscribe((value)=>{
+        if(value)this.pageCanvasExec()
+      })
+    }else {
+        this.pageCanvasExec()
+    }
+  },
+  methods: {
+    pageCanvasExec() {
+      this.canvasScene = this.provider.canvasScene
+      // console.log('ここでこのページのcanvas methodを実行')
+      // console.log('this.canvasScene:',this.canvasScene)
+    }
   },
   computed: {
     data () {

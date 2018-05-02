@@ -1,6 +1,8 @@
 <template lang="pug">
-  .canvasWrapper(ref="wrapper")
-    canvas(ref="canvas")
+  .theme-container(:class="pageClasses")
+    .canvasWrapper(ref="wrapper")
+      canvas(ref="canvas")
+    slot
 </template>
 
 <script>
@@ -16,11 +18,29 @@ export default {
   },
   data () {
     return {
+      provider: {
+        canvasScene: null,
+        created: new BehaviorSubject(false)
+      },
       loading: true,
       setupCount: 0,
       setupFinishCount: 2
     }
   },
+  provide () {
+    return {
+      provider: this.provider
+    }
+  },
+  computed: {
+    pageClasses() {
+      const userPageClass = this.$page.frontmatter.pageClass
+      return [
+        userPageClass
+      ]
+    }
+  },
+
   created() {
     this.setupSubject = new BehaviorSubject(this.setupCount)
     this.setupSubject.subscribe((value)=>{
@@ -51,10 +71,10 @@ export default {
       })
       await canvasScene.init()
       canvasScene.start()
+      this.provider.canvasScene = canvasScene
+      this.provider.created.next(true)
     }
   },
-  computed: {
-  }
 }
 </script>
 

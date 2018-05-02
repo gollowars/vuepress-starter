@@ -1,6 +1,5 @@
 <template lang='pug'>
-  .theme-container(:class="pageClasses")
-    CanvasApp( :title="this.name")
+  CanvasLayout( :title="this.name")
     .custom-layout(v-if="$page.frontmatter.layout")
       component(:is="$page.frontmatter.layout")
     Home(v-else-if="$page.frontmatter.home")
@@ -17,25 +16,16 @@ import nprogress from 'nprogress'
 // layout
 import Home from './Home.vue'
 import Page from './Page.vue'
-import CanvasApp from './CanvasApp.vue'
+import CanvasLayout from './CanvasLayout.vue'
 
 import { pathToComponentName } from '@app/util'
 import { resolveSidebarItems } from './scripts/util'
 
 export default {
-  components: { Home, Page, CanvasApp },
+  components: { Home, Page, CanvasLayout },
   data () {
     return {
       name: 'ashikawa'
-    }
-  },
-
-  computed: {
-    pageClasses() {
-      const userPageClass = this.$page.frontmatter.pageClass
-      return [
-        userPageClass
-      ]
     }
   },
 
