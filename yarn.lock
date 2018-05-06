@@ -2148,6 +2148,10 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
 
+fs@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/fs/-/fs-0.0.2.tgz#e1f244ef3933c1b2a64bd4799136060d0f5914f8"
+
 fsevents@^1.1.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-1.2.2.tgz#4f598f0f69b273188ef4a62ca4e9e08ace314bbf"
@@ -3846,6 +3850,10 @@ path-type@^3.0.0:
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-3.0.0.tgz#cef31dc8e0a1a3bb0d105c0cd97cf3bf47f4e36f"
   dependencies:
     pify "^3.0.0"
+
+path@^0.11.14:
+  version "0.11.14"
+  resolved "https://registry.yarnpkg.com/path/-/path-0.11.14.tgz#cbc7569355cb3c83afeb4ace43ecff95231e5a7d"
 
 pbkdf2@^3.0.3:
   version "3.0.16"
@@ -5623,6 +5631,13 @@ webpack-dev-middleware@^3.0.0:
     range-parser "^1.0.3"
     url-join "^4.0.0"
     webpack-log "^1.0.1"
+
+webpack-glsl-loader@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/webpack-glsl-loader/-/webpack-glsl-loader-1.0.1.tgz#72a0e30192bd57947d60d6d505c915be680d0acc"
+  dependencies:
+    fs "0.0.2"
+    path "^0.11.14"
 
 webpack-hot-client@^2.0.0, webpack-hot-client@^2.2.0:
   version "2.2.2"

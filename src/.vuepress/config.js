@@ -26,20 +26,33 @@ module.exports = {
     resolve: {
       alias: {
         '@alias': path.resolve(__dirname,'../assets'),
-        '@fonts': path.resolve(__dirname,'../assets/fonts'),
+        '@shader': path.resolve(__dirname, './theme/shader'),
+        '@themeScript': path.resolve(__dirname, './theme/scripts'),
+        '@themeCanvas': path.resolve(__dirname,'./theme/scripts/canvas'),
       }
     }
   },
   chainWebpack: config => {
+    // babel
     const jsRule = config.module.rule('js')
     jsRule.uses.delete('buble-loader')
     jsRule.use('babel-loader').loader('babel-loader')
 
+    // pug
     config.module
       .rule('pug')
       .test(/\.pug$/)
       .use('pug-plain-loader')
         .loader('pug-plain-loader')
+        .end()
+
+
+    // glsl
+    config.module
+      .rule('glsl')
+      .test(/\.(glsl|vs|fs|vert|frag)$/)
+      .use('webpack-glsl-loader')
+        .loader('webpack-glsl-loader')
         .end()
   },
   themeConfig: {

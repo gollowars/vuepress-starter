@@ -6,10 +6,11 @@ import {
   LinearFilter
 } from 'three'
 
-import Data from '../../store/Data'
-import Params from '../../libs/util/Params'
-import { resizeCover } from '../../libs/util/Resizer'
+import Data from '@themeCanvas/store/Data'
+import Params from '@themeCanvas/libs/util/Params'
+import { resizeCover } from '@themeCanvas/libs/util/Resizer'
 import FilterMapRenderScene from './FilterMapRenderScene'
+import BaseVertShader from '@shader/Base.vert'
 
 export default class MaskAnimMeshGroup {
   constructor() {
@@ -20,6 +21,8 @@ export default class MaskAnimMeshGroup {
     this.geometry = new PlaneGeometry(1, 1, 10, 10)
     this.texture = Data.loader.get('/assets/raw/image1.jpg')
     this.texture.minFilter = LinearFilter
+
+
     let material = new MeshBasicMaterial({ map: this.texture })
     this._mesh = new Mesh(this.geometry, material)
     const size = resizeCover(this.texture.image.width, this.texture.image.height, Data.canvas.width, Data.canvas.height)

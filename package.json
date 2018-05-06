@@ -25,6 +25,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "three": "^0.92.0",
-    "vuepress": "^0.8.4"
+    "vuepress": "^0.8.4",
+    "webpack-glsl-loader": "^1.0.1"
   }
 }
