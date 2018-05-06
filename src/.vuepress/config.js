@@ -28,7 +28,7 @@ module.exports = {
         '@alias': path.resolve(__dirname,'../assets'),
         '@shader': path.resolve(__dirname, './theme/shader'),
         '@themeScript': path.resolve(__dirname, './theme/scripts'),
-        '@themeCanvas': path.resolve(__dirname,'./theme/scripts/canvas'),
+        '@canvas': path.resolve(__dirname,'./theme/scripts/canvas'),
       }
     }
   },

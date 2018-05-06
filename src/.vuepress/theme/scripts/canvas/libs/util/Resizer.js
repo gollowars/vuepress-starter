@@ -17,6 +17,17 @@ class Resizer {
     this._resize = this._resize.bind(this)
   }
 
+  cover(objW, objH, screenW, screenH) {
+    const wi = objW
+    const hi = objH
+    const ws = screenW
+    const hs = screenH
+    const ri = wi / hi
+    const rs = ws / hs
+    const resize = rs > ri ? { width: ws, height: hi * ws / wi } : { width: wi * hs / hi, height: hs }
+    return resize
+  }
+
   _resize() {
     for(let key in this.resizeEvents) {
       this.resizeEvents[key]()

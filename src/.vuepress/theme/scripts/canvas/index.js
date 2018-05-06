@@ -25,7 +25,7 @@ class CanvasScene extends Base3dScene {
   }
 
   update() {
-
+    this.maskMesh.update(this.renderer, this.camera)
   }
   resizeUpdate(){
     this.maskMesh.resize()

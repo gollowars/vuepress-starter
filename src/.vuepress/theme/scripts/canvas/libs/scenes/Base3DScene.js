@@ -81,7 +81,7 @@ class Base3dScene {
   }
 
   start() {
-    this.last = window.performance.now()
+    Data.last = window.performance.now()
     this.baseUpdate()
     this.didStart()
 
@@ -91,6 +91,7 @@ class Base3dScene {
 
   baseUpdate() {
     this.animationID = requestAnimationFrame(this.baseUpdate)
+    this.updateTime()
     this.update()
     this.render()
   }
@@ -109,13 +110,16 @@ class Base3dScene {
 
   }
 
-  render() {
+  updateTime() {
     let now = window.performance.now()
-    let delta = (now - this.last) / 1000
+    let delta = (now - Data.last) / 1000
     if (delta > 1) delta = 1
     let time = now / 1000
-    this.last = now
-    this.time = time
+    Data.last = now
+    Data.time = time
+  }
+
+  render() {
     this.renderer.render(this.scene, this.camera)
     // postProcessUpdate(self)
   }

@@ -16,8 +16,9 @@ class Params {
   add(obj,folder){
     if (!Config.SHOW_PARAMS) return
     const gui = (folder) ? this.gui.addFolder(folder): this.gui
-    if(folder) gui.open()
-
+    if(folder) {
+      gui.open()
+    }
     for (let key in obj) {
       const val = obj[key]
       let g = null
@@ -32,8 +33,15 @@ class Params {
       }
       val.gui = g
     }
-    this.objList[name] = obj
+
+    if(folder){
+      this.objList[folder] = obj
+    }else{
+      Object.assign(this.Object,obj)
+    }
   }
+
+
   get(name) {
     return this.objList[name]
   }

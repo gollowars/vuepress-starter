@@ -2,15 +2,17 @@ import {
   PlaneGeometry,
   BoxGeometry,
   MeshBasicMaterial,
+  ShaderMaterial,
   Mesh,
   LinearFilter
 } from 'three'
 
-import Data from '@themeCanvas/store/Data'
-import Params from '@themeCanvas/libs/util/Params'
-import { resizeCover } from '@themeCanvas/libs/util/Resizer'
+import Data from '@canvas/store/Data'
+import Params from '@canvas/libs/util/Params'
+import Resizer from '@canvas/libs/util/Resizer'
 import FilterMapRenderScene from './FilterMapRenderScene'
-import BaseVertShader from '@shader/Base.vert'
+import vertShader from '@shader/Base.vert'
+import fragShader from '@shader/Displace.frag'
 
 export default class MaskAnimMeshGroup {
   constructor() {
@@ -18,17 +20,42 @@ export default class MaskAnimMeshGroup {
   }
 
   init() {
+    Params.add({
+      shapeNum:{value:70, min:2, max:100},
+      strength:{value:15, min:0, max:100},
+      noise:{value:12, min:0, max:100},
+      rotation:{value:45, min:-180, max:180},
+      offsetX:{value:150, min:0, max:200},
+      offsetY:{value:100, min:0, max:200},
+      showMask:{value:false},
+      isBlank:{value:false}
+    },'mask')
+    this.filterMask = new FilterMapRenderScene()
+
+
     this.geometry = new PlaneGeometry(1, 1, 10, 10)
     this.texture = Data.loader.get('/assets/raw/image1.jpg')
     this.texture.minFilter = LinearFilter
 
+    let material = new ShaderMaterial({
+      vertexShader: vertShader,
+      fragmentShader: fragShader,
+      uniforms: {
+        tDiffuse: {
+          value: this.texture
+        },
+        tMask: {
+          value: this.filterMask.texture
+        },
+        strength: Params.get('mask').strength,
+        showMask: Params.get('mask').showMask,
+        offsetX: Params.get('mask').offsetX,
+        offsetY: Params.get('mask').offsetY
+      }
+    })
 
-    let material = new MeshBasicMaterial({ map: this.texture })
     this._mesh = new Mesh(this.geometry, material)
-    const size = resizeCover(this.texture.image.width, this.texture.image.height, Data.canvas.width, Data.canvas.height)
-    this._mesh.scale.x = size.width
-    this._mesh.scale.y = size.height
-    this.filterMask = new FilterMapRenderScene()
+    this.resize()
   }
 
   get mesh(){
@@ -36,9 +63,18 @@ export default class MaskAnimMeshGroup {
   }
 
   resize() {
-    const size = resizeCover(this.texture.image.width, this.texture.image.height, Data.canvas.width, Data.canvas.height)
+    const size = Resizer.cover(this.texture.image.width, this.texture.image.height, Data.canvas.width, Data.canvas.height)
     this._mesh.scale.x = size.width
     this._mesh.scale.y = size.height
-    this.filterMask.size(Data.canvas.width, Data.canvas.height)
+    this.filterMask.resize(size.width, size.height)
+  }
+
+  update(renderer, camera) {
+    this._render(renderer, camera)
+    this.filterMask.update()
+  }
+
+  _render(renderer,camera){
+    this.filterMask.render(renderer, camera)
   }
 }

@@ -8,6 +8,8 @@ class Data {
       height: 0
     }
     this.loader = new Loader()
+    this.time = 0
+    this.last = 0
   }
   init() {
     this.md = new MobileDetect(window.navigator.userAgent)
