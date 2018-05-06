@@ -9,6 +9,7 @@
 import { BehaviorSubject } from 'rxjs'
 import CanvasScene from './scripts/canvas/'
 import Loader from './scripts/canvas/libs/util/Loader'
+import Data from './scripts/canvas/store/Data'
 
 export default {
   props: {
@@ -57,8 +58,8 @@ export default {
 
   methods: {
     async startLoad() {
-      Loader.add('/assets/raw/image1.jpg')
-      await Loader.load()
+      Data.loader.add('/assets/raw/image1.jpg')
+      await Data.loader.load()
       this.setupSubject.next(++this.setupCount)
     },
 
@@ -67,8 +68,7 @@ export default {
       const parentNode = this.$refs['wrapper']
       const canvasScene = new CanvasScene({
         node: canvasNode,
-        parentNode: parentNode,
-        loader: Loader
+        parentNode: parentNode
       })
       await canvasScene.init()
       canvasScene.start()

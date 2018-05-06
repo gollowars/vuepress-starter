@@ -4,7 +4,7 @@ import {
   LinearFilter
 } from 'three'
 
-class Loader {
+export default class Loader {
   constructor() {
     this.urls = []
     this.textures = {}
@@ -44,5 +44,3 @@ class Loader {
     new Error('Cannot load ' + url)
   }
 }
-
-export default new Loader()

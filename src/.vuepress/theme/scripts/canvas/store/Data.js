@@ -1,4 +1,5 @@
 import MobileDetect from 'mobile-detect'
+import Loader from '../libs/util/Loader';
 
 class Data {
   constructor() {
@@ -6,6 +7,7 @@ class Data {
       width: 0,
       height: 0
     }
+    this.loader = new Loader()
   }
   init() {
     this.md = new MobileDetect(window.navigator.userAgent)

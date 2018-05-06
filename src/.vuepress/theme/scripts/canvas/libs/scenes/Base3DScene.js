@@ -11,7 +11,6 @@ class Base3dScene {
     this.params = Object.assign({}, props);
     this.node = this.params.node
     this.parentNode = this.params.parentNode
-    this.loader = this.params.loader
     this.baseUpdate = this.baseUpdate.bind(this)
     this.resize = this.resize.bind(this)
   }
