@@ -28,7 +28,7 @@ export default class FilterMapRenderScene extends Scene {
   }
 
   size(width, height) {
-    ratio = window.devicePixelRatio || 1
+    const ratio = window.devicePixelRatio || 1
     this.renderTarget.setSize(width*ratio, height*ratio)
   }
 
