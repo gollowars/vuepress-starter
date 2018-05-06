@@ -38,6 +38,9 @@ module.exports = {
     jsRule.uses.delete('buble-loader')
     jsRule.use('babel-loader').loader('babel-loader')
 
+    // for webpack4 bug of webworker
+    config.output.globalObject('this')
+
     // pug
     config.module
       .rule('pug')

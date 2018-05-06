@@ -60,7 +60,8 @@ export default class FilterMapRenderScene extends Scene {
       }))
     this.shape = shape
     this.shapes.push(shape)
-    this.add(shape)
+    this.mask.add(this.shape)
+    this.add(this.mask)
   }
 
   _maskResize() {
