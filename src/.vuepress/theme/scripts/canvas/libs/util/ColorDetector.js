@@ -22,8 +22,10 @@ function createColorPlane(hex) {
 function createPaletteColorGroup(palette, size) {
   const group = new Group()
 
+  console.log('==========')
   Object.keys(palette).forEach((key, index) => {
     if (!palette[key]){
+      console.log('no key:',key)
       return
     }
     const swatch = palette[key]
@@ -34,6 +36,9 @@ function createPaletteColorGroup(palette, size) {
     const y = size / 2
     mesh.position.x = x
     mesh.position.y = y
+
+    console.log(`key:${key} color:${swatch.getHex()}`)
+
 
     group.add(mesh)
   })
@@ -59,8 +64,8 @@ class ColorDetector {
   async detect(path) {
     return new Promise((resolve)=>{
       Vibrant.from(path, {
-          colorCount: 64,
-          quality: 10
+          colorCount: 255,
+          quality: 20
         }).useQuantizer(QuantizerWebWorker.default)
         .getPalette()
         .then((palette) => {
@@ -94,12 +99,27 @@ class ColorDetector {
   getDominantColors(palette) {
     const { vibrants, muteds } = this.sortPalette(palette)
     const dominantVibrant = eval(vibrants[0].getHex().replace('#', '0x'))
+    const dominantVibrantPopulation = vibrants[0]._population
     const dominantMuted = eval(muteds[0].getHex().replace('#', '0x'))
+    const dominantMutedPopulation = muteds[0]._population
+
+
     return {
-      vibrant: dominantVibrant,
-      muted: dominantMuted
+      vibrant: {
+        hex: dominantVibrant,
+        population: dominantVibrantPopulation
+      },
+      muted: {
+        hex: dominantMuted,
+        population: dominantMutedPopulation
+      }
     }
   }
+
+  getContrastColors(palette) {
+    // console.log(palette)
+  }
+
 
 
 

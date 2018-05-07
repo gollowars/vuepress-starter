@@ -5,7 +5,8 @@ import {
   ShaderMaterial,
   Mesh,
   Group,
-  LinearFilter
+  LinearFilter,
+  Color
 } from 'three'
 
 import { MeshText2D, textAlign} from 'three-text2d'
@@ -34,19 +35,20 @@ export default class MaskAnimMeshGroup {
     Params.add({
       shapeNum:{value:70, min:2, max:100},
       strength:{value:15, min:0, max:100},
-      noise:{value:12, min:0, max:100},
+      noise:{value:14, min:0, max:100},
       rotation:{value:45, min:-180, max:180},
-      offsetX:{value:150, min:0, max:200},
-      offsetY:{value:100, min:0, max:200},
+      offsetX:{value:24, min:0, max:200},
+      offsetY:{value:24, min:0, max:200},
       showMask:{value:false},
       isBlank:{value:false}
     },'mask')
 
 
     this.geometry = new PlaneGeometry(1, 1, 10, 10)
-    this.texture = Data.loader.get('/assets/raw/image1.jpg')
-    this.texture.minFilter = LinearFilter
-    this.filterMask = new FilterMapRenderScene(this.texture)
+    this.imageTexture = Data.loader.get('/assets/raw/image4.png')
+    this.imageTexture.minFilter = LinearFilter
+
+    this.filterMask = new FilterMapRenderScene(this.imageTexture)
 
     this.textRenderTexture = new TextRenderTexture(this.renderer, this.camera)
     this.textRenderTexture.setText('D')
@@ -57,11 +59,17 @@ export default class MaskAnimMeshGroup {
       vertexShader: vertShader,
       fragmentShader: fragShader,
       uniforms: {
-        tDiffuse: {
+        tTextMask: {
           value: this.textRenderTexture.texture
         },
         tMask: {
           value: this.filterMask.texture
+        },
+        tDiffuse: {
+          value: this.imageTexture
+        },
+        maskColor: {
+          value: new Color(this.imageTexture.vibrant)
         },
         strength: Params.get('mask').strength,
         showMask: Params.get('mask').showMask,
@@ -82,7 +90,7 @@ export default class MaskAnimMeshGroup {
   }
 
   resize() {
-    const size = Resizer.cover(this.texture.image.width, this.texture.image.height, Data.canvas.width, Data.canvas.height)
+    const size = Resizer.cover(this.imageTexture.image.width, this.imageTexture.image.height, Data.canvas.width, Data.canvas.height)
     this._mesh.scale.x = Data.canvas.width
     this._mesh.scale.y = Data.canvas.height
     this.filterMask.resize(size.width, size.height)
@@ -92,7 +100,7 @@ export default class MaskAnimMeshGroup {
 
   update() {
     this._render()
-    // this._mesh.material.uniforms.tDiffuse.value.needsUpdate = true
+    // this._mesh.material.uniforms.tTextMask.value.needsUpdate = true
     this.filterMask.update()
   }
 

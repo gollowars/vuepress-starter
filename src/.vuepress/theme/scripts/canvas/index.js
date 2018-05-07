@@ -24,6 +24,11 @@ class CanvasScene extends Base3dScene {
     this.renderer.extensions.get('OES_texture_float')
     // console.time('ColorPalette')
 
+    // const { vibrant, muted } = ColorDetector.getDominantColors(palette)
+    this.maskMesh = new MaskAnimMesh(this.renderer,this.camera)
+    this.scene.add(this.maskMesh.mesh)
+
+
     // const imgPath = '/assets/raw/image2.png'
     // const texture = Data.loader.get(imgPath)
     // texture.minFilter = LinearFilter
@@ -32,9 +37,6 @@ class CanvasScene extends Base3dScene {
     // const paletteMesh = createPaletteMesh(palette, texture)
     // this.scene.add(paletteMesh)
 
-    // const { vibrant, muted } = ColorDetector.getDominantColors(palette)
-    this.maskMesh = new MaskAnimMesh(this.renderer,this.camera)
-    this.scene.add(this.maskMesh.mesh)
   }
 
 
