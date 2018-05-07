@@ -27,14 +27,13 @@ class CanvasScene extends Base3dScene {
     const imgPath = '/assets/raw/image2.png'
     const texture = Data.loader.get(imgPath)
     texture.minFilter = LinearFilter
-    const palette = await ColorDetector.detect(imgPath)
-    console.log('palette:',palette)
+    const detect = await ColorDetector.detect(imgPath)
+    const palette = detect.palette
+
     const paletteMesh = createPaletteMesh(palette, texture)
     this.scene.add(paletteMesh)
 
-    const { vibrant, muted } = ColorDetector.getDominantColors(palette)
-    console.log(vibrant)
-    console.log(muted)
+    // const { vibrant, muted } = ColorDetector.getDominantColors(palette)
     // this.maskMesh = new MaskAnimMesh()
     // this.scene.add(this.maskMesh.mesh)
   }

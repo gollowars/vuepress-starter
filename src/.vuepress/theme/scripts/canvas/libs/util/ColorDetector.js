@@ -63,7 +63,12 @@ class ColorDetector {
           quality: 10
         }).useQuantizer(QuantizerWebWorker.default)
         .getPalette()
-        .then((palette) => { resolve(palette)})
+        .then((palette) => {
+          resolve({
+            palette: palette,
+            path: path
+          })
+        })
     })
   }
 

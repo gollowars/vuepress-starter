@@ -10,6 +10,8 @@ import { BehaviorSubject } from 'rxjs'
 import CanvasScene from './scripts/canvas/'
 import Loader from './scripts/canvas/libs/util/Loader'
 import Data from './scripts/canvas/store/Data'
+import Config from './scripts/canvas/store/Config'
+import ColorDetector from './scripts/canvas/libs/util/ColorDetector'
 
 export default {
   props: {
@@ -58,12 +60,32 @@ export default {
 
   methods: {
     async startLoad() {
-      Data.loader.add('/assets/raw/image1.jpg')
-      Data.loader.add('/assets/raw/image2.png')
-      Data.loader.add('/assets/raw/image3.png')
-
+      Config.ASSETS.forEach((path)=>{
+        Data.loader.add(path)
+      })
       await Data.loader.load()
+      await this.colorLoad()
       this.setupSubject.next(++this.setupCount)
+    },
+
+    async colorLoad(){
+      const assetLen = Config.ASSETS.length
+      let loadCnt = 0
+      return new Promise((resolve)=>{
+        Config.ASSETS.forEach((path)=>{
+          ColorDetector.detect(path)
+          .then((detector,path)=>{
+            const { vibrant, muted } = ColorDetector.getDominantColors(detector.palette)
+            Data.loader.get(detector.path).vibrant = vibrant
+            Data.loader.get(detector.path).muted = muted
+            loadCnt++
+            // console.log(`load: ${loadCnt} / ${assetLen}`)
+            if(loadCnt >= assetLen) {
+              resolve()
+            }
+          })
+        })
+      })
     },
 
     async createCanvas() {
