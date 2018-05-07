@@ -31,6 +31,10 @@ class CanvasScene extends Base3dScene {
     console.log('palette:',palette)
     const paletteMesh = createPaletteMesh(palette, texture)
     this.scene.add(paletteMesh)
+
+    const { vibrant, muted } = ColorDetector.getDominantColors(palette)
+    console.log(vibrant)
+    console.log(muted)
     // this.maskMesh = new MaskAnimMesh()
     // this.scene.add(this.maskMesh.mesh)
   }

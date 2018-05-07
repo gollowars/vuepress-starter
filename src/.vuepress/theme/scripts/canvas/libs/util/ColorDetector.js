@@ -24,7 +24,6 @@ function createPaletteColorGroup(palette, size) {
 
   Object.keys(palette).forEach((key, index) => {
     if (!palette[key]){
-      console.log('none key:',key)
       return
     }
     const swatch = palette[key]
@@ -36,14 +35,21 @@ function createPaletteColorGroup(palette, size) {
     mesh.position.x = x
     mesh.position.y = y
 
-    console.log('key:',key)
-
     group.add(mesh)
   })
 
   return group
 }
 
+function comparePopulation(a,b) {
+  if(a._population < b._population) {
+    return 1
+  }
+  if (a._population > b._population) {
+    return -1
+  }
+  return 0
+}
 
 class ColorDetector {
   constructor(){
@@ -60,6 +66,38 @@ class ColorDetector {
         .then((palette) => { resolve(palette)})
     })
   }
+
+  sortPalette(palette) {
+    let vibrantList = []
+    let mutedList = []
+    Object.keys(palette).forEach((key, index) => {
+      if (!palette[key]) return
+      if (key.toLocaleLowerCase().indexOf('vibrant') >= 0) {
+        vibrantList.push(palette[key])
+      } else {
+        mutedList.push(palette[key])
+      }
+    })
+    vibrantList = vibrantList.sort(comparePopulation)
+    mutedList = mutedList.sort(comparePopulation)
+    return {
+      vibrants:vibrantList,
+      muteds: mutedList
+    }
+  }
+
+  getDominantColors(palette) {
+    const { vibrants, muteds } = this.sortPalette(palette)
+    const dominantVibrant = eval(vibrants[0].getHex().replace('#', '0x'))
+    const dominantMuted = eval(muteds[0].getHex().replace('#', '0x'))
+    return {
+      vibrant: dominantVibrant,
+      muted: dominantMuted
+    }
+  }
+
+
+
 }
 
 
@@ -73,8 +111,8 @@ export function createPaletteMesh(palette, texture) {
     map: texture
   })
 
-  const w = texture.image.width / 2
-  const h = texture.image.height / 2
+  const w = texture.image.width
+  const h = texture.image.height
   const originalImageMesh = new Mesh(geo, tex)
   originalImageMesh.scale.set(w, h, 1)
   group.add(originalImageMesh)
