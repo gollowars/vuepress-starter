@@ -93,7 +93,7 @@ export default {
             const mc = eval(m1.getHex().replace('#', '0x'))
 
             const color = (vibrant.population > muted.population) ? vibrant.hex : muted.hex
-            Data.loader.get(detector.path).vibrant = vc
+            Data.loader.get(detector.path).vibrant = color
             Data.loader.get(detector.path).muted = muted.hex
             loadCnt++
             // console.log(`load: ${loadCnt} / ${assetLen}`)
