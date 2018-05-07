@@ -21,7 +21,7 @@ export default class FilterMapRenderScene extends Scene {
     this.maskTexture = texture
     this.renderTarget = null
     this.colorOffset = 0
-    this.shapeNum = 50
+    this.shapeNum = 200
     this.shapes = []
     this.init()
   }
@@ -91,7 +91,7 @@ export default class FilterMapRenderScene extends Scene {
       col.b = map(Math.cos(radian), 0, 1, -1, 1)
     })
 
-    this.mask.rotation.z = Math.PI/180 * 45
+    this.mask.rotation.z = Math.PI/180 * Params.get('mask').rotation.value
   }
 
   _maskResize() {

@@ -15,13 +15,16 @@ import Data from '@canvas/store/Data'
 import Params from '@canvas/libs/util/Params'
 import Resizer from '@canvas/libs/util/Resizer'
 import FilterMapRenderScene from './FilterMapRenderScene'
+import TextRenderTexture from './TextRenderTexture'
 import vertShader from '@shader/Base.vert'
 import fragShader from '@shader/Displace.frag'
 import { GroupedObservable } from 'rxjs';
 import FontFaceObserver from 'fontfaceobserver'
 
 export default class MaskAnimMeshGroup {
-  constructor() {
+  constructor(renderer,camera) {
+    this.renderer = renderer
+    this.camera = camera
     this.init()
   }
 
@@ -45,12 +48,17 @@ export default class MaskAnimMeshGroup {
     this.texture.minFilter = LinearFilter
     this.filterMask = new FilterMapRenderScene(this.texture)
 
+    this.textRenderTexture = new TextRenderTexture(this.renderer, this.camera)
+    this.textRenderTexture.setText('D')
+    this.textRenderTexture.render(this.renderer, this.camera)
+
+
     let material = new ShaderMaterial({
       vertexShader: vertShader,
       fragmentShader: fragShader,
       uniforms: {
         tDiffuse: {
-          value: this.texture
+          value: this.textRenderTexture.texture
         },
         tMask: {
           value: this.filterMask.texture
@@ -66,18 +74,6 @@ export default class MaskAnimMeshGroup {
     this._group.add(this._mesh)
 
 
-    const font = new FontFaceObserver('YuuriFont')
-    font.load().then(()=>{
-      console.log('font avilable')
-      var text = new MeshText2D("CENTER", {
-        align: textAlign.center,
-        font: '30px YuuriFont',
-        fillStyle: '#FFFFFF',
-        antialias: true
-      })
-      this._group.add(text)
-    })
-
     this.resize()
   }
 
@@ -87,18 +83,20 @@ export default class MaskAnimMeshGroup {
 
   resize() {
     const size = Resizer.cover(this.texture.image.width, this.texture.image.height, Data.canvas.width, Data.canvas.height)
-    this._mesh.scale.x = size.width
-    this._mesh.scale.y = size.height
+    this._mesh.scale.x = Data.canvas.width
+    this._mesh.scale.y = Data.canvas.height
     this.filterMask.resize(size.width, size.height)
+    this.textRenderTexture.resize()
+    this.textRenderTexture.render(this.renderer, this.camera)
   }
 
-  update(renderer, camera) {
-    this._render(renderer, camera)
-    this._mesh.material.uniforms.tDiffuse.value.needsUpdate = true
+  update() {
+    this._render()
+    // this._mesh.material.uniforms.tDiffuse.value.needsUpdate = true
     this.filterMask.update()
   }
 
-  _render(renderer,camera){
-    this.filterMask.render(renderer, camera)
+  _render(){
+    this.filterMask.render(this.renderer, this.camera)
   }
 }

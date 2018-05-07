@@ -12,6 +12,7 @@ import Loader from './scripts/canvas/libs/util/Loader'
 import Data from './scripts/canvas/store/Data'
 import Config from './scripts/canvas/store/Config'
 import ColorDetector from './scripts/canvas/libs/util/ColorDetector'
+import FontFaceObserver from 'fontfaceobserver'
 
 export default {
   props: {
@@ -27,7 +28,7 @@ export default {
       },
       loading: true,
       setupCount: 0,
-      setupFinishCount: 2
+      setupFinishCount: 3
     }
   },
   provide () {
@@ -52,6 +53,7 @@ export default {
       }
     })
     this.startLoad()
+    this.startFontLoad()
   },
 
   async mounted() {
@@ -66,8 +68,14 @@ export default {
       await Data.loader.load()
       await this.colorLoad()
       this.setupSubject.next(++this.setupCount)
-    },
 
+    },
+    startFontLoad() {
+      const font = new FontFaceObserver('YuuriFont')
+      font.load().then(()=>{
+        this.setupSubject.next(++this.setupCount)
+      })
+    },
     async colorLoad(){
       const assetLen = Config.ASSETS.length
       let loadCnt = 0
