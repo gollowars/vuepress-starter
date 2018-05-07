@@ -24,26 +24,25 @@ class CanvasScene extends Base3dScene {
     this.renderer.extensions.get('OES_texture_float')
     // console.time('ColorPalette')
 
-    const imgPath = '/assets/raw/image2.png'
-    const texture = Data.loader.get(imgPath)
-    texture.minFilter = LinearFilter
-    const detect = await ColorDetector.detect(imgPath)
-    const palette = detect.palette
-
-    const paletteMesh = createPaletteMesh(palette, texture)
-    this.scene.add(paletteMesh)
+    // const imgPath = '/assets/raw/image2.png'
+    // const texture = Data.loader.get(imgPath)
+    // texture.minFilter = LinearFilter
+    // const detect = await ColorDetector.detect(imgPath)
+    // const palette = detect.palette
+    // const paletteMesh = createPaletteMesh(palette, texture)
+    // this.scene.add(paletteMesh)
 
     // const { vibrant, muted } = ColorDetector.getDominantColors(palette)
-    // this.maskMesh = new MaskAnimMesh()
-    // this.scene.add(this.maskMesh.mesh)
+    this.maskMesh = new MaskAnimMesh()
+    this.scene.add(this.maskMesh.mesh)
   }
 
 
   update() {
-    // this.maskMesh.update(this.renderer, this.camera)
+    this.maskMesh.update(this.renderer, this.camera)
   }
   resizeUpdate(){
-    // this.maskMesh.resize()
+    this.maskMesh.resize()
   }
 
 }

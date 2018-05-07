@@ -30,12 +30,14 @@ export default class MaskAnimMeshGroup {
       showMask:{value:false},
       isBlank:{value:false}
     },'mask')
-    this.filterMask = new FilterMapRenderScene()
 
 
     this.geometry = new PlaneGeometry(1, 1, 10, 10)
     this.texture = Data.loader.get('/assets/raw/image1.jpg')
     this.texture.minFilter = LinearFilter
+
+    this.filterMask = new FilterMapRenderScene(this.texture)
+
 
     let material = new ShaderMaterial({
       vertexShader: vertShader,
@@ -71,6 +73,7 @@ export default class MaskAnimMeshGroup {
 
   update(renderer, camera) {
     this._render(renderer, camera)
+    this._mesh.material.uniforms.tDiffuse.value.needsUpdate = true
     this.filterMask.update()
   }
 

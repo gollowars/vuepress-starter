@@ -6,17 +6,22 @@ import {
   Object3D,
   PlaneBufferGeometry,
   MeshBasicMaterial,
-  Mesh
+  Mesh,
+  Group,
+  Color
 } from 'three'
 
 import Data from '@canvas/store/Data'
+import Params from '../util/Params';
+import { map } from '../util/Util'
 
 export default class FilterMapRenderScene extends Scene {
-  constructor() {
+  constructor(texture) {
     super()
+    this.maskTexture = texture
     this.renderTarget = null
-
-    this.shape = null
+    this.colorOffset = 0
+    this.shapeNum = 50
     this.shapes = []
     this.init()
   }
@@ -48,23 +53,53 @@ export default class FilterMapRenderScene extends Scene {
   }
 
   update() {
-    this.shape.rotation.z += Math.PI/180 * 1
+    this._updateShape()
   }
 
   _maskMake() {
-    this.mask = new Object3D()
-    const shape = new Mesh(
-      new PlaneBufferGeometry(1, 1),
-      new MeshBasicMaterial({
-        color: 0xff0000
-      }))
-    this.shape = shape
-    this.shapes.push(shape)
-    this.mask.add(this.shape)
+    this.mask = new Group()
+
+    this._makeShapes()
+
     this.add(this.mask)
+  }
+  _makeShapes(){
+    const number = this.shapeNum
+    const shapeW = Data.canvas.width / number
+    const shapeH = Data.canvas.height * 1.5
+    for(let i = 0;i<number;i++) {
+      const red = Math.round(i * 255 / number)
+      const blue = Math.round(i * 255 / number)
+      const color = new Color(`rgb(${red}, ${blue}, 0)`);
+      const shape = new Mesh(
+        new PlaneBufferGeometry(1, 1),
+        new MeshBasicMaterial({
+          color: color
+        }))
+      shape.scale.set(shapeW, shapeH)
+      const posx = i * Data.canvas.width / number
+      const posy = 0
+      shape.position.x = posx - Data.canvas.width / 2
+      shape.position.y = posy
+      this.shapes.push(shape)
+      this.mask.add(shape)
+    }
+  }
+
+  _updateShape() {
+    const number = this.shapeNum
+
+    this.shapes.forEach((shape,i)=>{
+      let col = shape.material.color
+      let radian = i * (Params.get('mask').noise.value*0.01) + Data.time*4
+      col.r = map(Math.sin(radian), 0, 1, -1, 1)
+      col.b = map(Math.cos(radian), 0, 1, -1, 1)
+    })
+
+    this.mask.rotation.z = Params.get('mask').rotation.value
   }
 
   _maskResize() {
-    this.shape.scale.set(this.width , this.height, 1)
+
   }
 }
