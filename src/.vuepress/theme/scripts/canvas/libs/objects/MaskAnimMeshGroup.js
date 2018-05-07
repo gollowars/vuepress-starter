@@ -4,8 +4,12 @@ import {
   MeshBasicMaterial,
   ShaderMaterial,
   Mesh,
+  Group,
   LinearFilter
 } from 'three'
+
+import { MeshText2D, textAlign} from 'three-text2d'
+
 
 import Data from '@canvas/store/Data'
 import Params from '@canvas/libs/util/Params'
@@ -13,6 +17,8 @@ import Resizer from '@canvas/libs/util/Resizer'
 import FilterMapRenderScene from './FilterMapRenderScene'
 import vertShader from '@shader/Base.vert'
 import fragShader from '@shader/Displace.frag'
+import { GroupedObservable } from 'rxjs';
+import FontFaceObserver from 'fontfaceobserver'
 
 export default class MaskAnimMeshGroup {
   constructor() {
@@ -20,6 +26,8 @@ export default class MaskAnimMeshGroup {
   }
 
   init() {
+    this._group = new Group()
+
     Params.add({
       shapeNum:{value:70, min:2, max:100},
       strength:{value:15, min:0, max:100},
@@ -55,11 +63,26 @@ export default class MaskAnimMeshGroup {
     })
 
     this._mesh = new Mesh(this.geometry, material)
+    this._group.add(this._mesh)
+
+
+    const font = new FontFaceObserver('YuuriFont')
+    font.load().then(()=>{
+      console.log('font avilable')
+      var text = new MeshText2D("CENTER", {
+        align: textAlign.center,
+        font: '30px YuuriFont',
+        fillStyle: '#FFFFFF',
+        antialias: true
+      })
+      this._group.add(text)
+    })
+
     this.resize()
   }
 
   get mesh(){
-    return this._mesh
+    return this._group
   }
 
   resize() {

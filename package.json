@@ -17,6 +17,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "dat-gui": "^0.5.0",
+    "fontfaceobserver": "^2.0.13",
     "http-server": "^0.11.1",
     "mobile-detect": "^1.4.1",
     "node-vibrant": "^3.0.0",
@@ -26,6 +27,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "three": "^0.92.0",
+    "three-text2d": "^0.4.1",
     "vuepress": "^0.8.4",
     "webpack-glsl-loader": "^1.0.1",
     "worker-loader": "^1.1.1"
