@@ -59,6 +59,9 @@ export default {
   methods: {
     async startLoad() {
       Data.loader.add('/assets/raw/image1.jpg')
+      Data.loader.add('/assets/raw/image2.png')
+      Data.loader.add('/assets/raw/image3.png')
+
       await Data.loader.load()
       this.setupSubject.next(++this.setupCount)
     },
