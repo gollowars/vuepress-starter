@@ -35,9 +35,7 @@ export default class MaskAnimMeshGroup {
     this.geometry = new PlaneGeometry(1, 1, 10, 10)
     this.texture = Data.loader.get('/assets/raw/image1.jpg')
     this.texture.minFilter = LinearFilter
-
     this.filterMask = new FilterMapRenderScene(this.texture)
-
 
     let material = new ShaderMaterial({
       vertexShader: vertShader,
