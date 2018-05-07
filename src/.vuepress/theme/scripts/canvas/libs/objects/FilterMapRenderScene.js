@@ -65,8 +65,6 @@ export default class FilterMapRenderScene extends Scene {
   }
   _makeShapes(){
     const number = this.shapeNum
-    const shapeW = Data.canvas.width / number
-    const shapeH = Data.canvas.height * 1.5
     for(let i = 0;i<number;i++) {
       const red = Math.round(i * 255 / number)
       const blue = Math.round(i * 255 / number)
@@ -76,14 +74,11 @@ export default class FilterMapRenderScene extends Scene {
         new MeshBasicMaterial({
           color: color
         }))
-      shape.scale.set(shapeW, shapeH)
-      const posx = i * Data.canvas.width / number
-      const posy = 0
-      shape.position.x = posx - Data.canvas.width / 2
-      shape.position.y = posy
       this.shapes.push(shape)
       this.mask.add(shape)
     }
+
+    this._maskResize()
   }
 
   _updateShape() {
@@ -96,10 +91,19 @@ export default class FilterMapRenderScene extends Scene {
       col.b = map(Math.cos(radian), 0, 1, -1, 1)
     })
 
-    this.mask.rotation.z = Params.get('mask').rotation.value
+    this.mask.rotation.z = Math.PI/180 * 45
   }
 
   _maskResize() {
-
+    const number = this.shapeNum
+    const shapeW = this.width / number
+    const hypo = Math.sqrt(Math.pow(this.width, 2) + Math.pow(this.height, 2))
+    this.shapes.forEach((shape, i) => {
+      shape.scale.set(shapeW, hypo)
+      const posx = i * this.width / number
+      const posy = 0
+      shape.position.x = posx - this.width / 2
+      shape.position.y = posy
+    })
   }
 }
