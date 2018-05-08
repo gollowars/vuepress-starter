@@ -53,7 +53,7 @@ export default class MaskAnimMeshGroup {
 
 
     this.geometry = new PlaneGeometry(1, 1, 10, 10)
-    this.imageTexture = Data.loader.get('/assets/raw/image4.png')
+    this.imageTexture = Data.loader.get('/assets/raw/image2.png')
     this.imageTexture.minFilter = LinearFilter
     this.filterMask = new FilterMapRenderScene(this.imageTexture)
 
@@ -108,8 +108,6 @@ export default class MaskAnimMeshGroup {
     this.resize()
 
 
-
-
     // test
     setTimeout(()=>{
       this.showAnimation()
@@ -149,12 +147,23 @@ export default class MaskAnimMeshGroup {
   // animation
   showAnimation() {
     this.setup().play()
+
+    TweenMax.to(this.params.strength, 2.0, {
+      value: 5.0,
+      ease: Power2.easeInOut
+    })
+
     this.filterMask.blueUpAnim()
     .then(()=>{
       this.filterMask.redUpAnim()
-      .then(()=>{
+
+      setTimeout(()=>{
+        TweenMax.to(this.params.strength, 2.0, {
+          value: 1.5,
+          ease: Power2.easeInOut
+        })
         this.filterMask.greenUpAnim()
-      })
+      },800)
     })
     // setTimeout(()=>{
     //   this.anim1().play()
@@ -174,6 +183,7 @@ export default class MaskAnimMeshGroup {
       .set(this.params.diffuseMaskMixAmount, {value: 1.0})
       .set(this.params.noise, {value: 30.0})
       .set(this.params.diffuseLightenssAmp, {value: 1.0})
+      .set(this.params.strength, {value: 10.0})
       // .set(this.textRenderTexture.textGroup.rotation,{x: rotX, y: rotY, z: rotZ})
       // .set(this.textRenderTexture.textGroup.scale,{x: scale, y: scale, z: scale})
     return tl

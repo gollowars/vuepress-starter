@@ -29,12 +29,13 @@ void main(void) {
   float slantDistance = 2.5;
   p *= slantDistance;
 
+  float yurayuraSpeed = 4.0;
   float devideCnt = 60.;
 
-  float slantR = cos(p.x + p.y + (time * 2.)) / 2.;
+  float slantR = cos(p.x + p.y + (time * yurayuraSpeed)) / 2.;
   float devideR = floor(slantR * devideCnt) / devideCnt * 2.0;
 
-  float slantG = sin(p.x + p.y + (time * 2.4)) / 2.;
+  float slantG = sin(p.x + p.y + (time * (yurayuraSpeed+0.4))) / 2.;
   float devideG = floor(slantG * devideCnt) / devideCnt * 2.0;
 
   vec4 disp = vec4(vec3(devideR,devideG,0.0),1.0);
