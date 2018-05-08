@@ -22,14 +22,16 @@ void main(void) {
     vec4 textMask = texture2D(tTextMask, fract(vUv + offset * vec2(offsetX * 0.01, offsetY * 0.01)));
 
     if(textMask.r >= 1.0) {
-      // gl_FragColor = texture2D(tDiffuse, fract(vUv - offset * vec2(offsetX * 0.01, offsetY * 0.01)));
       gl_FragColor = diffuse*1.4;
     }else{
-      float r = mix(diffuse.r,maskColor.r,1.0 - mask.r*0.01);
-      float g = mix(diffuse.g,maskColor.g,1.0 - mask.b*0.01);
+      float r = mix(diffuse.r,maskColor.r,1.0 - mask.r*0.4);
+      float g = mix(diffuse.g,maskColor.g,1.0 - mask.b*0.4);
       float b = mix(diffuse.b,maskColor.b,1.0);
       gl_FragColor = vec4(r,g,b,1.0);
     }
+
+      // gl_FragColor = texture2D(tDiffuse, fract(vUv - offset * vec2(offsetX * 0.01, offsetY * 0.01)));
+
   }
 
 }

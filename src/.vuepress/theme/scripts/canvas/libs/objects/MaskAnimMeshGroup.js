@@ -45,14 +45,16 @@ export default class MaskAnimMeshGroup {
 
 
     this.geometry = new PlaneGeometry(1, 1, 10, 10)
-    this.imageTexture = Data.loader.get('/assets/raw/image4.png')
+    this.imageTexture = Data.loader.get('/assets/raw/image2.png')
     this.imageTexture.minFilter = LinearFilter
-
     this.filterMask = new FilterMapRenderScene(this.imageTexture)
 
     this.textRenderTexture = new TextRenderTexture(this.renderer, this.camera)
     this.textRenderTexture.setText('D')
     this.textRenderTexture.render(this.renderer, this.camera)
+
+    const size = Resizer.cover(this.imageTexture.image.width, this.imageTexture.image.height, Data.canvas.width, Data.canvas.height)
+    this.textRenderTexture.resize(size.width, size.height)
 
 
     let material = new ShaderMaterial({
@@ -91,10 +93,12 @@ export default class MaskAnimMeshGroup {
 
   resize() {
     const size = Resizer.cover(this.imageTexture.image.width, this.imageTexture.image.height, Data.canvas.width, Data.canvas.height)
-    this._mesh.scale.x = Data.canvas.width
-    this._mesh.scale.y = Data.canvas.height
+
+    this._mesh.scale.x = size.width
+    this._mesh.scale.y = size.height
+
     this.filterMask.resize(size.width, size.height)
-    this.textRenderTexture.resize()
+    this.textRenderTexture.resize(size.width, size.height)
     this.textRenderTexture.render(this.renderer, this.camera)
   }
 

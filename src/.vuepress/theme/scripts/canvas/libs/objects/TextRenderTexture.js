@@ -38,7 +38,6 @@ export default class TextRenderTexture extends Scene {
     this.add(this.plane)
     this.textStr = ''
     this.makeText()
-    this.resize()
   }
 
   makeText() {
@@ -57,12 +56,14 @@ export default class TextRenderTexture extends Scene {
     })
     this.add(this.text)
   }
-  resize() {
+
+  resize(width, height) {
     const ratio = window.devicePixelRatio || 1
-    this.renderTarget.setSize(Data.canvas.width * ratio, Data.canvas.height * ratio)
+
+    this.renderTarget.setSize(width * ratio, height * ratio)
     this.makeText()
-    this.text.position.y = Data.canvas.height / 2
-    this.plane.scale.set(Data.canvas.width, Data.canvas.height, 1)
+    this.text.position.y = height / 2
+    this.plane.scale.set(width, height, 1)
   }
 
   setText(text) {
