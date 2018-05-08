@@ -6,7 +6,8 @@ import {
   Mesh,
   Group,
   LinearFilter,
-  Color
+  Color,
+  Vector2
 } from 'three'
 
 import { MeshText2D, textAlign} from 'three-text2d'
@@ -73,6 +74,12 @@ export default class MaskAnimMeshGroup {
         maskColor: {
           value: new Color(this.imageTexture.vibrant)
         },
+        resolution: {
+          value: new Vector2(Data.canvas.width,Data.canvas.height)
+        },
+        imageResolution: {
+          value: new Vector2(this.imageTexture.image.width, this.imageTexture.image.height)
+        },
         strength: Params.get('mask').strength,
         showMask: Params.get('mask').showMask,
         offsetX: Params.get('mask').offsetX,
@@ -94,17 +101,20 @@ export default class MaskAnimMeshGroup {
   resize() {
     const size = Resizer.cover(this.imageTexture.image.width, this.imageTexture.image.height, Data.canvas.width, Data.canvas.height)
 
-    this._mesh.scale.x = size.width
-    this._mesh.scale.y = size.height
+    this._mesh.scale.x = Data.canvas.width
+    this._mesh.scale.y = Data.canvas.height
+
 
     this.filterMask.resize(size.width, size.height)
-    this.textRenderTexture.resize(size.width, size.height)
+    this.textRenderTexture.resize(Data.canvas.width, Data.canvas.height)
     this.textRenderTexture.render(this.renderer, this.camera)
+
+    this._mesh.material.uniforms.resolution.value = new Vector2(Data.canvas.width, Data.canvas.height)
+    this._mesh.material.uniforms.resolution.value.needsUpdate = true
   }
 
   update() {
     this._render()
-    // this._mesh.material.uniforms.tTextMask.value.needsUpdate = true
     this.filterMask.update()
   }
 
