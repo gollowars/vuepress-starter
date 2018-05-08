@@ -21,7 +21,7 @@ export default class FilterMapRenderScene extends Scene {
     this.maskTexture = texture
     this.renderTarget = null
     this.colorOffset = 0
-    this.shapeNum = 100
+    this.shapeNum = 20
     this.shapes = []
     this.init()
   }

@@ -36,13 +36,15 @@ export default class TextRenderTexture extends Scene {
     )
 
     this.add(this.plane)
+    this.textGroup = new Group()
+    this.add(this.textGroup)
     this.textStr = ''
     this.makeText()
   }
 
   makeText() {
     if(this.text){
-      this.remove(this.text)
+      this.textGroup.remove(this.text)
       this.text.mesh.material.dispose()
       this.text.mesh.geometry.dispose()
       this.text = null
@@ -54,7 +56,8 @@ export default class TextRenderTexture extends Scene {
       fillStyle: '#FFFFFF',
       antialias: true
     })
-    this.add(this.text)
+
+    this.textGroup.add(this.text)
   }
 
   resize(width, height) {
@@ -64,6 +67,10 @@ export default class TextRenderTexture extends Scene {
     this.makeText()
     this.text.position.y = height / 2
     this.plane.scale.set(width, height, 1)
+  }
+
+  update(){
+
   }
 
   setText(text) {
