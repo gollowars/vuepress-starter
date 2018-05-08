@@ -1,11 +1,11 @@
 <template lang="pug">
   .home
-    //- .hero
-    //-   img(v-if="data.heroImage" :src="$withBase(data.heroImage)" alt="hero")
-    //-   h1 {{ data.heroText || $title || 'Hello'}}
-    //-   p.description {{ data.tagline || $description || 'Welcome to your VuePress site' }}
-    //- Content(custom)
-    //- .footer(v-if="data.footer") {{ data.footer }}
+    .hero
+      img(v-if="data.heroImage" :src="$withBase(data.heroImage)" alt="hero")
+      h1 {{ data.heroText || $title || 'Hello'}}
+      p.description {{ data.tagline || $description || 'Welcome to your VuePress site' }}
+    Content(custom)
+    .footer(v-if="data.footer") {{ data.footer }}
 
 </template>
 

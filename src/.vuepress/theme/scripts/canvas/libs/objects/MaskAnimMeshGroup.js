@@ -58,7 +58,7 @@ export default class MaskAnimMeshGroup {
     this.filterMask = new FilterMapRenderScene(this.imageTexture)
 
     this.textRenderTexture = new TextRenderTexture(this.renderer, this.camera)
-    this.textRenderTexture.setText('D')
+    this.textRenderTexture.setText('V')
     this.textRenderTexture.render(this.renderer, this.camera)
 
     const ratio = window.devicePixelRatio || 1
@@ -159,7 +159,7 @@ export default class MaskAnimMeshGroup {
 
       setTimeout(()=>{
         TweenMax.to(this.params.strength, 2.0, {
-          value: 1.5,
+          value: 0.9,
           ease: Power2.easeInOut
         })
         this.filterMask.greenUpAnim()
