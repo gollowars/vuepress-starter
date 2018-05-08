@@ -35,16 +35,16 @@ export default class MaskAnimMeshGroup {
 
     Params.add({
       shapeNum:{value:70, min:2, max:100},
-      strength:{value:15, min:0, max:100},
+      strength:{value:8, min:0, max:100},
       noise:{value:30, min:0, max:100},
-      rotation:{value:45, min:-180, max:180},
+      rotation:{value:-180, min:-180, max:180},
       offsetX:{value:24, min:0, max:200},
       offsetY:{value:24, min:0, max:200},
       showMask:{value:false},
       isBlank:{value:false},
       diffuseMaskMixAmount: {value:1.0, min:0.0, max:1.0},
       maskMixAmp: {value:0.4, min:0.0, max:1.0},
-      diffuseLightenssAmp: {value:1.4, min:1.0, max:2.0},
+      diffuseLightenssAmp: {value:1.0, min:1.0, max:2.0},
       diffuseDisplaceAmount: {value:1.0, min:0.0, max:1.0},
       maskAlpha: {value:1.0, min:0.0, max:1.0}
     },'mask')
@@ -53,7 +53,7 @@ export default class MaskAnimMeshGroup {
 
 
     this.geometry = new PlaneGeometry(1, 1, 10, 10)
-    this.imageTexture = Data.loader.get('/assets/raw/image3.png')
+    this.imageTexture = Data.loader.get('/assets/raw/image4.png')
     this.imageTexture.minFilter = LinearFilter
     this.filterMask = new FilterMapRenderScene(this.imageTexture)
 
@@ -61,9 +61,8 @@ export default class MaskAnimMeshGroup {
     this.textRenderTexture.setText('D')
     this.textRenderTexture.render(this.renderer, this.camera)
 
-    const size = Resizer.cover(this.imageTexture.image.width, this.imageTexture.image.height, Data.canvas.width, Data.canvas.height)
-    this.textRenderTexture.resize(size.width, size.height)
-
+    const ratio = window.devicePixelRatio || 1
+    this.textRenderTexture.resize(Data.canvas.width, Data.canvas.height)
 
     let material = new ShaderMaterial({
       vertexShader: vertShader,
@@ -85,7 +84,10 @@ export default class MaskAnimMeshGroup {
           value: new Vector2(Data.canvas.width,Data.canvas.height)
         },
         imageResolution: {
-          value: new Vector2(this.imageTexture.image.width, this.imageTexture.image.height)
+          value: new Vector2(this.imageTexture.image.width * ratio, this.imageTexture.image.height * ratio)
+        },
+        time: {
+          value: Data.time
         },
         strength: this.params.strength,
         showMask: this.params.showMask,
@@ -119,16 +121,16 @@ export default class MaskAnimMeshGroup {
   }
 
   resize() {
-    const size = Resizer.cover(this.imageTexture.image.width, this.imageTexture.image.height, Data.canvas.width, Data.canvas.height)
 
     this._mesh.scale.x = Data.canvas.width
     this._mesh.scale.y = Data.canvas.height
 
-    this.filterMask.resize(size.width, size.height)
+    this.filterMask.resize(Data.canvas.width, Data.canvas.height)
     this.textRenderTexture.resize(Data.canvas.width, Data.canvas.height)
 
+    const ratio = window.devicePixelRatio || 1
+    this._mesh.material.uniforms.resolution.value = new Vector2(Data.canvas.width * ratio, Data.canvas.height * ratio)
 
-    this._mesh.material.uniforms.resolution.value = new Vector2(Data.canvas.width, Data.canvas.height)
     this._mesh.material.uniforms.resolution.value.needsUpdate = true
   }
 
@@ -136,6 +138,7 @@ export default class MaskAnimMeshGroup {
     this._render()
     this.filterMask.update()
     this.textRenderTexture.update()
+    this._mesh.material.uniforms.time.value = Data.time;
   }
 
   _render(){
@@ -146,10 +149,16 @@ export default class MaskAnimMeshGroup {
   // animation
   showAnimation() {
     this.setup().play()
-
-    setTimeout(()=>{
-      this.anim1().play()
-    },500)
+    this.filterMask.blueUpAnim()
+    .then(()=>{
+      this.filterMask.redUpAnim()
+      .then(()=>{
+        this.filterMask.greenUpAnim()
+      })
+    })
+    // setTimeout(()=>{
+    //   this.anim1().play()
+    // },500)
   }
   setup(){
     const tl = new TimelineMax({paused: true})
@@ -157,7 +166,7 @@ export default class MaskAnimMeshGroup {
     const rotX =Math.PI/180 *  Math.random() * 360
     const rotY =Math.PI/180 *  Math.random() * 360
     const rotZ = Math.PI / 180 * Math.random() * 360
-    const scale = Math.random() * 10
+    const scale = 4
 
     tl
       .set(this.params.maskAlpha, {value: 0.0})
@@ -165,8 +174,8 @@ export default class MaskAnimMeshGroup {
       .set(this.params.diffuseMaskMixAmount, {value: 1.0})
       .set(this.params.noise, {value: 30.0})
       .set(this.params.diffuseLightenssAmp, {value: 1.0})
-      .set(this.textRenderTexture.textGroup.rotation,{x: rotX, y: rotY, z: rotZ})
-      .set(this.textRenderTexture.textGroup.scale,{x: scale, y: scale, z: scale})
+      // .set(this.textRenderTexture.textGroup.rotation,{x: rotX, y: rotY, z: rotZ})
+      // .set(this.textRenderTexture.textGroup.scale,{x: scale, y: scale, z: scale})
     return tl
   }
 
@@ -177,25 +186,28 @@ export default class MaskAnimMeshGroup {
     const scale = 10
 
     const tl = new TimelineMax({paused: true})
-    const duration = 1.8
+    const duration = 1.0
     tl
       .add([
-        TweenMax.to(this.textRenderTexture.textGroup.rotation, duration, {
-          x: 0.0,
-          y: 0.0,
-          z: 0.0,
-          ease: Power2.easeInOut
-        }),
-        TweenMax.to(this.textRenderTexture.textGroup.scale, duration, {
-          x: 1.0,
-          y: 1.0,
-          z: 1.0,
-          ease: Power2.easeInOut
-        }),
+
+        // TweenMax.to(this.textRenderTexture.textGroup.rotation, duration, {
+        //   x: 0.0,
+        //   y: 0.0,
+        //   z: 0.0,
+        //   ease: Power2.easeInOut
+        // }),
+        // TweenMax.to(this.textRenderTexture.textGroup.scale, duration, {
+        //   x: 1.0,
+        //   y: 1.0,
+        //   z: 1.0,
+        //   ease: Power2.easeOut
+        // }),
+
         TweenMax.to(this.params.maskAlpha, duration, {
           value: 1.0,
           ease: Power2.easeIn
         }),
+
         TweenMax.to(this.params.diffuseLightenssAmp, duration, {
           value: 1.5,
           ease: Power2.easeIn
@@ -215,24 +227,24 @@ export default class MaskAnimMeshGroup {
         //   value: 14,
         //   ease: Power2.easeOut
         // }),
-        TweenMax.to(this.textRenderTexture.textGroup.rotation, 1.0, {
-          x: rotX,
-          y: rotY,
-          z: rotZ,
-          ease: Power2.easeInOut
-        }),
-        TweenMax.to(this.textRenderTexture.textGroup.scale, 1.0, {
-          x: scale,
-          y: scale,
-          z: scale,
-          ease: Power2.easeInOut
-        }),
+        // TweenMax.to(this.textRenderTexture.textGroup.rotation, 1.0, {
+        //   x: rotX,
+        //   y: rotY,
+        //   z: rotZ,
+        //   ease: Power2.easeInOut
+        // }),
+        // TweenMax.to(this.textRenderTexture.textGroup.scale, 1.0, {
+        //   x: scale,
+        //   y: scale,
+        //   z: scale,
+        //   ease: Power2.easeInOut
+        // }),
         TweenMax.to(this.params.maskAlpha, 1.0, {
           value: 0.0,
           ease: Power2.easeOut
         }),
         TweenMax.to(this.params.strength, 1.4, {
-          value: 4.0,
+          value: 2.0,
           ease: Power2.easeOut
         }),
 

@@ -37,6 +37,7 @@ class Base3dScene {
   }
 
   createRenderer() {
+    const ratio = window.devicePixelRatio || 1
     this.renderer.setPixelRatio(window.devicePixelRatio || 1)
     this.renderer.setSize(this.width, this.height)
   }
