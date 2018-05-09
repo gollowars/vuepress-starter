@@ -4,9 +4,10 @@ class Config {
     this.SHOW_PARAMS = true
     this.ASSETS = [
       '/assets/raw/image1.jpg',
-      '/assets/raw/image2.png',
-      '/assets/raw/image3.png',
-      '/assets/raw/image4.png',
+      '/assets/raw/image2.jpg',
+      '/assets/raw/image3.jpg',
+      '/assets/raw/image4.jpg',
+      '/assets/raw/image5.jpg',
     ]
   }
 }

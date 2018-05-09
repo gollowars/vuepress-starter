@@ -11,7 +11,7 @@ import {
 } from 'three'
 
 import { MeshText2D, textAlign} from 'three-text2d'
-import { TimelineMax, TweenMax,Power2 } from 'gsap'
+import { TimelineMax, TweenMax,Power2,Power1 } from 'gsap'
 
 import Data from '@canvas/store/Data'
 import Params from '@canvas/libs/util/Params'
@@ -27,10 +27,10 @@ export default class MaskAnimMeshGroup {
   constructor(renderer,camera) {
     this.renderer = renderer
     this.camera = camera
-    this.init()
+
   }
 
-  init() {
+  initialize(title,url) {
     this._group = new Group()
 
     Params.add({
@@ -49,12 +49,10 @@ export default class MaskAnimMeshGroup {
 
     this.params = Params.get('mask')
 
-
-    this.titleText = 'D'
-
+    this.titleText = title
 
     this.geometry = new PlaneGeometry(1, 1, 10, 10)
-    this.imageTexture = Data.loader.get('/assets/raw/image2.png')
+    this.imageTexture = Data.loader.get(url)
     this.imageTexture.minFilter = LinearFilter
     this.filterMask = new FilterMapRenderScene(this.imageTexture)
 
@@ -118,22 +116,6 @@ export default class MaskAnimMeshGroup {
     this._group.add(this._mesh)
 
     this.resize()
-
-    // test
-    setTimeout(()=>{
-      this.showAnimation().then(()=>{
-        this.transition('/assets/raw/image3.png', 'P')
-        .then(()=>{
-          this.showAnimation().then(()=>{
-            // this.transition('/assets/raw/image1.jpg', 'B')
-            // .then(()=>{
-            //   this.showAnimation()
-            // })
-
-          })
-        })
-      })
-    },500)
   }
 
   get mesh(){
@@ -167,6 +149,7 @@ export default class MaskAnimMeshGroup {
 
   ////////////////////////////////////////////////////////////////
   //// animation
+
   showSetup() {
     const tl = new TimelineMax({ paused: true })
 
@@ -199,7 +182,7 @@ export default class MaskAnimMeshGroup {
         this.filterMask.maskShaderControlAnim(new Color(1.0, 0, 1.0), 0.03)
         setTimeout(() => {
           TweenMax.to(this.params.strength, 2.0, {
-            value: 0.9,
+            value: 3.0,
             ease: Power2.easeInOut
           })
           this.filterMask.maskShaderControlAnim(new Color(1.0, 1.0, 1.0), 0.03)
@@ -227,31 +210,42 @@ export default class MaskAnimMeshGroup {
     return new Promise((resolve) => {
       this.transitionSetup().play()
 
-      this.filterMask.maskShaderControlAnim(new Color(1.0, 0.0, 0.0), 0.0)
-
+      this.filterMask.maskShaderControlAnim(new Color(1.0, 1.0, 0.0), 0.0)
       const tl = new TimelineMax({ paused: false })
       tl.add([
-        TweenMax.to(this.params.strength, 0.7, {
-          value: 15.0,
-          ease: Power2.easeOut,
+        TweenMax.to(this.params.strength, 0.8, {
+          value: 100.0,
+          ease: Power1.easeOut,
+          delay: 0.5
         }),
-        TweenMax.to(this.params.transitionMix, 0.7, {
+        TweenMax.to(this.params.transitionMix, 1.0, {
           value: 1.0,
           ease: Power2.easeOut,
-          delay: 1.0,
+          delay: 0.5,
         })
       ])
+      // .add([
+      //   TweenMax.to(this.params.strength, 0.5, {
+      //     value: 10.0,
+      //     ease: Power2.easeOut,
+      //     onComplete: () => {
+      //       this.transitionSwitch()
+      //       resolve()
+      //     }
+      //   })
+      // ])
 
       setTimeout(()=>{
-        TweenMax.to(this.params.strength, 0.5, {
-          value: 10.0,
-          ease: Power2.easeOut,
-        }),
-
         this.filterMask.maskShaderControlAnim(new Color(1.0, 0.0, 0.0), 0.03)
         .then(()=>{
-          this.transitionSwitch()
-          resolve()
+          TweenMax.to(this.params.strength, 1.2, {
+            value: 10.0,
+            ease: Power1.easeInOut,
+            onComplete:()=>{
+              this.transitionSwitch()
+              resolve()
+            }
+          })
         })
       },600)
 
@@ -276,8 +270,8 @@ export default class MaskAnimMeshGroup {
   transitionSetup() {
     const tl = new TimelineMax({ paused: true })
 
-    tl
-      .set(this.params.strength, { value: 0.9 })
+    // tl
+    //   .set(this.params.strength, { value: 0.9 })
 
     return tl
   }

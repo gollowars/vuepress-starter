@@ -42,16 +42,20 @@ void main(void) {
   float slantDistance = 2.5;
   p *= slantDistance;
 
-  float yurayuraSpeed = 4.0;
+  float yurayuraSpeed = 2.0;
   float devideCnt = 60.;
 
   float slantR = cos(p.x + p.y + (time * yurayuraSpeed)) / 2.;
   float devideR = floor(slantR * devideCnt) / devideCnt * 2.0;
 
-  float slantG = sin(p.x + p.y + (time * (yurayuraSpeed+0.4))) / 2.;
+  float slantG = sin(p.x + p.y + (time * (yurayuraSpeed*1.2)+0.5)) / 2.;
   float devideG = floor(slantG * devideCnt) / devideCnt * 2.0;
 
-  vec4 disp = vec4(vec3(devideR,devideG,0.0),1.0);
+  float slantB = cos(p.x + p.y + (time * (yurayuraSpeed*1.4)+1.0)) / 2.;
+  float devideB = floor(slantB * devideCnt) / devideCnt * 2.0;
+
+
+  vec4 disp = vec4(vec3(devideR,devideG,slantB),1.0);
 
 
   // calc diffuse uv
@@ -84,7 +88,7 @@ void main(void) {
 
 
     vec4 dist = vec4(0,0,0,0);
-    if(textMask.r >= 1.0) {
+    if(textMask.r >= 1.0 && textMask.b >= 1.0  && textMask.g >= 1.0) {
       diffuse *= 1.0 + (diffuseLightenssAmp*(1.0-devideMask.r)*(1.0 - devideMask.g));
       vec4 maskDist = mix(mixDiffuse, diffuse, devideMask.b);
       dist += maskDist;
