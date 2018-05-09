@@ -188,9 +188,9 @@ export default class MaskAnimMeshGroup {
       // red => overlay mask
       // green => overlay opacity
 
-      this.filterMask.maskShaderControlAnim(new Color(0, 0, 1.0), 0.02)
+      this.filterMask.maskShaderControlAnim(new Color(0, 0, 1.0), 0.05)
       .then(()=>{
-        this.filterMask.maskShaderControlAnim(new Color(1.0, 0, 1.0), 0.05)
+        this.filterMask.maskShaderControlAnim(new Color(1.0, 0, 1.0), 0.03)
         setTimeout(() => {
           TweenMax.to(this.params.strength, 2.0, {
             value: 0.9,
@@ -200,7 +200,7 @@ export default class MaskAnimMeshGroup {
           .then(()=>{
             resolve()
           })
-        }, 800)
+        }, 300)
       })
     })
   }
@@ -221,15 +221,15 @@ export default class MaskAnimMeshGroup {
     return new Promise((resolve) => {
       this.transitionSetup().play()
 
-      this.filterMask.maskShaderControlAnim(new Color(1.0, 0.0, 0.0), 0.05)
+      this.filterMask.maskShaderControlAnim(new Color(1.0, 0.0, 0.0), 0.0)
 
       const tl = new TimelineMax({ paused: false })
       tl.add([
-        TweenMax.to(this.params.strength, 1.0, {
-          value: 30.0,
+        TweenMax.to(this.params.strength, 0.7, {
+          value: 20.0,
           ease: Power2.easeIn,
         }),
-        TweenMax.to(this.params.transitionMix, 1.0, {
+        TweenMax.to(this.params.transitionMix, 0.7, {
           value: 1.0,
           ease: Power2.easeOut,
           delay: 1.0,
@@ -237,7 +237,7 @@ export default class MaskAnimMeshGroup {
       ])
 
       setTimeout(()=>{
-        this.filterMask.maskShaderControlAnim(new Color(0.0, 0.0, 0.0), 0.03)
+        this.filterMask.maskShaderControlAnim(new Color(1.0, 0.0, 0.0), 0.03)
         .then(()=>{
           this.transitionSwitch()
           resolve()
