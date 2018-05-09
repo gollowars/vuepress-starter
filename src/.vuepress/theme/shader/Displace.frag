@@ -46,7 +46,7 @@ void main(void) {
   float devideCnt = 60.;
 
   float slantR = cos(p.x + p.y + (time * yurayuraSpeed)) / 2.;
-  float devideR = floor(slantR * devideCnt) / devideCnt * 2.0;
+  float devideR = floor(slantR * devideCnt) / devideCnt * 1.6;
 
   float slantG = sin(p.x + p.y + (time * (yurayuraSpeed*1.2)+0.5)) / 2.;
   float devideG = floor(slantG * devideCnt) / devideCnt * 2.0;

@@ -26,7 +26,7 @@ class CanvasScene extends Base3dScene {
 
     // const { vibrant, muted } = ColorDetector.getDominantColors(palette)
     this.maskMesh = new MaskAnimMesh(this.renderer,this.camera)
-    this.maskMesh.initialize('V', '/assets/raw/image4.jpg')
+    this.maskMesh.initialize('V', '/assets/raw/image1.jpg')
     this.animLoop()
 
     this.scene.add(this.maskMesh.mesh)
