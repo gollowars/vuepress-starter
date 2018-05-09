@@ -122,9 +122,15 @@ export default class MaskAnimMeshGroup {
     // test
     setTimeout(()=>{
       this.showAnimation().then(()=>{
-        this.transition('/assets/raw/image4.png', 'E')
+        this.transition('/assets/raw/image3.png', 'P')
         .then(()=>{
-          this.showAnimation()
+          this.showAnimation().then(()=>{
+            // this.transition('/assets/raw/image1.jpg', 'B')
+            // .then(()=>{
+            //   this.showAnimation()
+            // })
+
+          })
         })
       })
     },500)
@@ -188,7 +194,7 @@ export default class MaskAnimMeshGroup {
       // red => overlay mask
       // green => overlay opacity
 
-      this.filterMask.maskShaderControlAnim(new Color(0, 0, 1.0), 0.05)
+      this.filterMask.maskShaderControlAnim(new Color(0, 0, 1.0), 0.03)
       .then(()=>{
         this.filterMask.maskShaderControlAnim(new Color(1.0, 0, 1.0), 0.03)
         setTimeout(() => {
@@ -196,7 +202,7 @@ export default class MaskAnimMeshGroup {
             value: 0.9,
             ease: Power2.easeInOut
           })
-          this.filterMask.maskShaderControlAnim(new Color(1.0, 1.0, 1.0), 0.05)
+          this.filterMask.maskShaderControlAnim(new Color(1.0, 1.0, 1.0), 0.03)
           .then(()=>{
             resolve()
           })
@@ -226,8 +232,8 @@ export default class MaskAnimMeshGroup {
       const tl = new TimelineMax({ paused: false })
       tl.add([
         TweenMax.to(this.params.strength, 0.7, {
-          value: 20.0,
-          ease: Power2.easeIn,
+          value: 15.0,
+          ease: Power2.easeOut,
         }),
         TweenMax.to(this.params.transitionMix, 0.7, {
           value: 1.0,
@@ -237,12 +243,17 @@ export default class MaskAnimMeshGroup {
       ])
 
       setTimeout(()=>{
+        TweenMax.to(this.params.strength, 0.5, {
+          value: 10.0,
+          ease: Power2.easeOut,
+        }),
+
         this.filterMask.maskShaderControlAnim(new Color(1.0, 0.0, 0.0), 0.03)
         .then(()=>{
           this.transitionSwitch()
           resolve()
         })
-      },1000)
+      },600)
 
     })
   }
