@@ -6,21 +6,34 @@ uniform float offsetX;
 uniform float offsetY;
 uniform bool showMask;
 uniform bool useDiffuse;
-uniform vec3 maskColor;
+uniform vec3 currentMaskColor;
 uniform vec2 resolution;
 uniform vec2 imageResolution;
 
-uniform float diffuseMaskMixAmount;
-uniform float maskMixAmp;
+// transition
+uniform sampler2D nexttDiffuse;
+uniform vec2 nextImageTexture;
+uniform float transitionMix;
+uniform vec3 nextMaskColor;
+
 uniform float diffuseLightenssAmp;
 uniform float diffuseDisplaceAmount;
-uniform float maskAlpha;
 uniform float time;
 
 varying vec2 vUv;
 
 
-
+vec2 getCoverUv(vec2 targetResolution){
+  vec2 ratio = vec2(
+        min((resolution.x / resolution.y) / (targetResolution.x / targetResolution.y), 1.0),
+        min((resolution.y / resolution.x) / (targetResolution.y / targetResolution.x), 1.0)
+      );
+  vec2 uv = vec2(
+      vUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
+      vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
+    );
+  return uv;
+}
 
 void main(void) {
   // DisplaceWave generate
@@ -42,14 +55,10 @@ void main(void) {
 
 
   // calc diffuse uv
-  vec2 ratio = vec2(
-      min((resolution.x / resolution.y) / (imageResolution.x / imageResolution.y), 1.0),
-      min((resolution.y / resolution.x) / (imageResolution.y / imageResolution.x), 1.0)
-    );
-  vec2 diffuseUv = vec2(
-      vUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
-      vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
-    );
+  vec2 diffuseUv = getCoverUv(imageResolution);
+  vec2 nextDiffuseUv = getCoverUv(imageResolution);
+
+  vec3 maskColor = mix(currentMaskColor,nextMaskColor, transitionMix);
 
   vec4 devideMask = texture2D(tMask, vUv);
   vec4 mask = disp;
@@ -60,7 +69,10 @@ void main(void) {
     vec2 offset = vec2(mask.r, mask.g) * strength * 0.01;
     vec4 textMask = texture2D(tTextMask, fract(vUv + offset * vec2(offsetX * 0.01, offsetY * 0.01)));
 
-    vec4 diffuseDisplace = texture2D(tDiffuse, fract(diffuseUv - offset * vec2(offsetX * 0.01, offsetY * 0.01)));
+    vec4 currentDiffuseDisplace = texture2D(tDiffuse, fract(diffuseUv - offset * vec2(offsetX * 0.01, offsetY * 0.01)));
+    vec4 nextDiffuseDisplace = texture2D(nexttDiffuse, fract(diffuseUv - offset * vec2(offsetX * 0.01, offsetY * 0.01)));
+    vec4 diffuseDisplace = mix(currentDiffuseDisplace, nextDiffuseDisplace, transitionMix);
+
     vec4 diffuse = texture2D(tDiffuse, diffuseUv);
 
     diffuse = mix(diffuse,diffuseDisplace, diffuseDisplaceAmount);

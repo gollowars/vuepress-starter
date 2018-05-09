@@ -42,14 +42,15 @@ export default class MaskAnimMeshGroup {
       offsetY:{value:24, min:0, max:200},
       showMask:{value:false},
       isBlank:{value:false},
-      diffuseMaskMixAmount: {value:1.0, min:0.0, max:1.0},
-      maskMixAmp: {value:0.4, min:0.0, max:1.0},
       diffuseLightenssAmp: {value:1.0, min:1.0, max:2.0},
-      diffuseDisplaceAmount: {value:1.0, min:0.0, max:1.0},
-      maskAlpha: {value:1.0, min:0.0, max:1.0}
+      diffuseDisplaceAmount: { value: 1.0, min: 0.0, max: 1.0 },
+      transitionMix: {value:0.0, min:0.0, max:1.0},
     },'mask')
 
     this.params = Params.get('mask')
+
+
+    this.titleText = 'D'
 
 
     this.geometry = new PlaneGeometry(1, 1, 10, 10)
@@ -57,8 +58,13 @@ export default class MaskAnimMeshGroup {
     this.imageTexture.minFilter = LinearFilter
     this.filterMask = new FilterMapRenderScene(this.imageTexture)
 
+
+    this.nextImageTexture = this.imageTexture
+    this.nextImageTexture.minFilter = LinearFilter
+
     this.textRenderTexture = new TextRenderTexture(this.renderer, this.camera)
-    this.textRenderTexture.setText('V')
+    this.textRenderTexture.setText(this.titleText)
+
     this.textRenderTexture.render(this.renderer, this.camera)
 
     const ratio = window.devicePixelRatio || 1
@@ -77,14 +83,23 @@ export default class MaskAnimMeshGroup {
         tDiffuse: {
           value: this.imageTexture
         },
-        maskColor: {
+        nexttDiffuse: {
+          value: this.nextImageTexture
+        },
+        currentMaskColor: {
           value: new Color(this.imageTexture.vibrant)
+        },
+        nextMaskColor: {
+          value: new Color(this.nextImageTexture.vibrant)
         },
         resolution: {
           value: new Vector2(Data.canvas.width,Data.canvas.height)
         },
         imageResolution: {
           value: new Vector2(this.imageTexture.image.width * ratio, this.imageTexture.image.height * ratio)
+        },
+        nextImageResolution: {
+          value: new Vector2(this.nextImageTexture.image.width * ratio, this.nextImageTexture.image.height * ratio)
         },
         time: {
           value: Data.time
@@ -93,24 +108,25 @@ export default class MaskAnimMeshGroup {
         showMask: this.params.showMask,
         offsetX: this.params.offsetX,
         offsetY: this.params.offsetY,
-        diffuseMaskMixAmount: this.params.diffuseMaskMixAmount,
-        maskMixAmp: this.params.maskMixAmp,
         diffuseLightenssAmp: this.params.diffuseLightenssAmp,
         diffuseDisplaceAmount: this.params.diffuseDisplaceAmount,
-        maskAlpha: this.params.maskAlpha,
+        transitionMix: this.params.transitionMix,
       },
     })
 
     this._mesh = new Mesh(this.geometry, material)
     this._group.add(this._mesh)
 
-
     this.resize()
-
 
     // test
     setTimeout(()=>{
-      this.showAnimation()
+      this.showAnimation().then(()=>{
+        this.transition('/assets/raw/image4.png', 'E')
+        .then(()=>{
+          this.showAnimation()
+        })
+      })
     },500)
   }
 
@@ -128,7 +144,6 @@ export default class MaskAnimMeshGroup {
 
     const ratio = window.devicePixelRatio || 1
     this._mesh.material.uniforms.resolution.value = new Vector2(Data.canvas.width * ratio, Data.canvas.height * ratio)
-
     this._mesh.material.uniforms.resolution.value.needsUpdate = true
   }
 
@@ -144,144 +159,118 @@ export default class MaskAnimMeshGroup {
     this.textRenderTexture.render(this.renderer, this.camera)
   }
 
-  // animation
-  showAnimation() {
-    this.setup().play()
+  ////////////////////////////////////////////////////////////////
+  //// animation
+  showSetup() {
+    const tl = new TimelineMax({ paused: true })
 
-    TweenMax.to(this.params.strength, 2.0, {
-      value: 5.0,
-      ease: Power2.easeInOut
-    })
-
-    this.filterMask.blueUpAnim()
-    .then(()=>{
-      this.filterMask.redUpAnim()
-
-      setTimeout(()=>{
-        TweenMax.to(this.params.strength, 2.0, {
-          value: 0.9,
-          ease: Power2.easeInOut
-        })
-        this.filterMask.greenUpAnim()
-      },800)
-    })
-    // setTimeout(()=>{
-    //   this.anim1().play()
-    // },500)
-  }
-  setup(){
-    const tl = new TimelineMax({paused: true})
-
-    const rotX =Math.PI/180 *  Math.random() * 360
-    const rotY =Math.PI/180 *  Math.random() * 360
+    const rotX = Math.PI / 180 * Math.random() * 360
+    const rotY = Math.PI / 180 * Math.random() * 360
     const rotZ = Math.PI / 180 * Math.random() * 360
     const scale = 4
 
+    this.filterMask.maskShaderControlAnim(new Color(0, 0, 0.0), 0.00)
     tl
-      .set(this.params.maskAlpha, {value: 0.0})
-      .set(this.params.maskMixAmp, {value: 0.0})
-      .set(this.params.diffuseMaskMixAmount, {value: 1.0})
-      .set(this.params.noise, {value: 30.0})
-      .set(this.params.diffuseLightenssAmp, {value: 1.0})
-      .set(this.params.strength, {value: 10.0})
-      // .set(this.textRenderTexture.textGroup.rotation,{x: rotX, y: rotY, z: rotZ})
-      // .set(this.textRenderTexture.textGroup.scale,{x: scale, y: scale, z: scale})
+      .set(this.params.noise, { value: 30.0 })
+      .set(this.params.strength, { value: 10.0 })
+      .set(this.params.transitionMix, {value: 0.0})
     return tl
   }
+  showAnimation() {
+    return new Promise((resolve)=>{
+      this.showSetup().play()
 
-  anim1(){
-    const rotX = Math.PI / 180 * Math.random() * 180 +  Math.PI
-    const rotY = Math.PI / 180 * Math.random() * 180 +  Math.PI
-    const rotZ = Math.PI / 180 * Math.random() * 180 +  Math.PI
-    const scale = 10
+      TweenMax.to(this.params.strength, 2.0, {
+        value: 5.0,
+        ease: Power2.easeInOut
+      })
+      // blue => textmask
+      // red => overlay mask
+      // green => overlay opacity
 
-    const tl = new TimelineMax({paused: true})
-    const duration = 1.0
-    tl
-      .add([
+      this.filterMask.maskShaderControlAnim(new Color(0, 0, 1.0), 0.02)
+      .then(()=>{
+        this.filterMask.maskShaderControlAnim(new Color(1.0, 0, 1.0), 0.05)
+        setTimeout(() => {
+          TweenMax.to(this.params.strength, 2.0, {
+            value: 0.9,
+            ease: Power2.easeInOut
+          })
+          this.filterMask.maskShaderControlAnim(new Color(1.0, 1.0, 1.0), 0.05)
+          .then(()=>{
+            resolve()
+          })
+        }, 800)
+      })
+    })
+  }
 
-        // TweenMax.to(this.textRenderTexture.textGroup.rotation, duration, {
-        //   x: 0.0,
-        //   y: 0.0,
-        //   z: 0.0,
-        //   ease: Power2.easeInOut
-        // }),
-        // TweenMax.to(this.textRenderTexture.textGroup.scale, duration, {
-        //   x: 1.0,
-        //   y: 1.0,
-        //   z: 1.0,
-        //   ease: Power2.easeOut
-        // }),
+  transition(path,nextText) {
+    const ratio = window.devicePixelRatio || 1
+    this.nextImageTexture = Data.loader.get(path)
+    this.nextImageTexture.minFilter = LinearFilter
+    this.titleText = nextText
+    this._mesh.material.uniforms.nextImageResolution.value = new Vector2(this.nextImageTexture.image.width * ratio, this.nextImageTexture.image.height * ratio)
+    this._mesh.material.uniforms.nextImageResolution.value.needsUpdate = true
+    this._mesh.material.uniforms.nexttDiffuse.value = this.nextImageTexture
+    this._mesh.material.uniforms.nexttDiffuse.value.needsUpdate = true
+    this._mesh.material.uniforms.nextMaskColor.value = new Color(this.nextImageTexture.vibrant)
+    this._mesh.material.uniforms.nextMaskColor.value.needsUpdate = true
 
-        TweenMax.to(this.params.maskAlpha, duration, {
+
+    return new Promise((resolve) => {
+      this.transitionSetup().play()
+
+      this.filterMask.maskShaderControlAnim(new Color(1.0, 0.0, 0.0), 0.05)
+
+      const tl = new TimelineMax({ paused: false })
+      tl.add([
+        TweenMax.to(this.params.strength, 1.0, {
+          value: 30.0,
+          ease: Power2.easeIn,
+        }),
+        TweenMax.to(this.params.transitionMix, 1.0, {
           value: 1.0,
-          ease: Power2.easeIn
-        }),
-
-        TweenMax.to(this.params.diffuseLightenssAmp, duration, {
-          value: 1.5,
-          ease: Power2.easeIn
-        })]
-      )
-      .add([
-        // TweenMax.to(this.params.noise, 3, {
-        //   value: 100,
-        //   ease: Power2.easeIn
-        // }),
-        TweenMax.to(this.params.maskMixAmp, 2, {
-          value: 1.0,
-          ease: Power2.easeIn
-      })])
-      .add([
-        // TweenMax.to(this.params.noise, 2, {
-        //   value: 14,
-        //   ease: Power2.easeOut
-        // }),
-        // TweenMax.to(this.textRenderTexture.textGroup.rotation, 1.0, {
-        //   x: rotX,
-        //   y: rotY,
-        //   z: rotZ,
-        //   ease: Power2.easeInOut
-        // }),
-        // TweenMax.to(this.textRenderTexture.textGroup.scale, 1.0, {
-        //   x: scale,
-        //   y: scale,
-        //   z: scale,
-        //   ease: Power2.easeInOut
-        // }),
-        TweenMax.to(this.params.maskAlpha, 1.0, {
-          value: 0.0,
-          ease: Power2.easeOut
-        }),
-        TweenMax.to(this.params.strength, 1.4, {
-          value: 2.0,
-          ease: Power2.easeOut
-        }),
-
-        TweenMax.to(this.params.diffuseMaskMixAmount, 1.4, {
-          value: 0.0,
-          ease: Power2.easeOut
-        }),
-        TweenMax.to(this.params.diffuseLightenssAmp, 1.4, {
-          value: 1.0,
-          ease: Power2.easeOut
+          ease: Power2.easeOut,
+          delay: 1.0,
         })
       ])
-      .add([
 
-      ])
+      setTimeout(()=>{
+        this.filterMask.maskShaderControlAnim(new Color(0.0, 0.0, 0.0), 0.03)
+        .then(()=>{
+          this.transitionSwitch()
+          resolve()
+        })
+      },1000)
 
+    })
+  }
 
+  transitionSwitch(){
+    this.imageTexture = this.nextImageTexture
+    this.textRenderTexture.setText(this.titleText)
 
+    const ratio = window.devicePixelRatio || 1
+    this._mesh.material.uniforms.tDiffuse.value = this.imageTexture
+    this._mesh.material.uniforms.tDiffuse.value.needsUpdate = true
 
+    this._mesh.material.uniforms.currentMaskColor.value = new Color(this.imageTexture.vibrant)
+    this._mesh.material.uniforms.currentMaskColor.value.needsUpdate = true
 
+    this._mesh.material.uniforms.imageResolution.value = new Vector2(this.imageTexture.image.width * ratio, this.imageTexture.image.height * ratio)
+    this._mesh.material.uniforms.imageResolution.value.needsUpdate = true
+  }
 
+  transitionSetup() {
+    const tl = new TimelineMax({ paused: true })
 
+    tl
+      .set(this.params.strength, { value: 0.9 })
 
-
-      // .to(this.params.maskAlpha,1, {value: 1.0})
-      // .to(this.params.diffuseLightenssAmp,1.0, {value: 1.5})
-      // .to(this.params.maskMixAmp,1.0, {value: 0.8})
     return tl
   }
+
+
+
 }

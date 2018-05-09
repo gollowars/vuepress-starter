@@ -87,9 +87,7 @@ export default class FilterMapRenderScene extends Scene {
     const number = this.shapeNum
     // this.shapes.forEach((shape,i)=>{
     //   let col = shape.material.color
-    //   let radian = i * (Params.get('mask').noise.value*0.01) + Data.time*4
-    //   col.r = map(Math.sin(radian), 0, 1, -1, 1)
-    //   col.g = map(Math.cos(radian), 0, 1, -1, 1)
+    //   col.g = Params.get('mask').maskAlpha.value
     // })
 
     this.mask.rotation.z = Math.PI/180 * Params.get('mask').rotation.value
@@ -108,41 +106,19 @@ export default class FilterMapRenderScene extends Scene {
     })
   }
 
-  blueUpAnim(tweenOption) {
+
+  maskShaderControlAnim(toColor,delay) {
     const number = this.shapeNum
     const duration = 0.8
-    const delay = 0.05
     const shapeLen = this.shapes.length
     return new Promise((resolve) => {
       for (let i = 0; i < this.shapes.length; i++) {
         const shape = this.shapes[this.shapes.length - (i + 1)]
         let col = shape.material.color
         TweenMax.to(col, duration, {
-          b: 1.0,
-          delay: i * delay,
-          ease: Power2.easeInOut,
-          onComplete: () => {
-            if (i >= shapeLen-1) {
-              resolve()
-            }
-          }
-        })
-      }
-    })
-  }
-
-
-  redUpAnim(tweenOption) {
-    const number = this.shapeNum
-    const duration = 0.8
-    const delay = 0.05
-    const shapeLen = this.shapes.length
-    return new Promise((resolve) => {
-      for (let i = 0; i < this.shapes.length; i++) {
-        const shape = this.shapes[this.shapes.length - (i + 1)]
-        let col = shape.material.color
-        TweenMax.to(col, duration, {
-          r: 1.0,
+          r: toColor.r,
+          g: toColor.g,
+          b: toColor.b,
           delay: i * delay,
           ease: Power2.easeInOut,
           onComplete: () => {
@@ -154,35 +130,6 @@ export default class FilterMapRenderScene extends Scene {
       }
     })
   }
-
-
-  greenUpAnim(tweenOption) {
-    const number = this.shapeNum
-    const duration = 0.8
-    const delay = 0.05
-    const shapeLen = this.shapes.length
-    return new Promise((resolve) => {
-      for (let i = 0; i < this.shapes.length; i++) {
-        const shape = this.shapes[this.shapes.length - (i + 1)]
-        let col = shape.material.color
-        TweenMax.to(col, duration, {
-          g: 1.0,
-          delay: i * delay,
-          ease: Power2.easeInOut,
-          onComplete: () => {
-            if (i >= shapeLen - 1) {
-              resolve()
-            }
-          }
-        })
-      }
-    })
-  }
-
-
-
-
-
 
 
 }
