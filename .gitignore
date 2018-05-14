@@ -64,4 +64,4 @@ typings/
 
 
 # vuepress dist
-dist/
+# dist/

@@ -4,8 +4,6 @@
       component(:is="$page.frontmatter.layout")
     Home(v-else-if="$page.frontmatter.home")
     Page(v-else)
-      slot(name="page-top" slot="top")
-      slot(name="page-bottom" slot="bottom")
 </template>
 
 <script>

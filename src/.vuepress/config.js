@@ -15,7 +15,7 @@ module.exports = {
         ['meta',{ name:"og:description", content:"description"}],
         ['meta',{ name:"og:type", content:"website"}],
         ['meta',{ name:"og:url", content:"og　url"}],
-        ['meta',{ name:"og:image", content:"http://absolute-domain.jp/logo.png"}],
+        ['meta',{ name:"og:image", content:"http://sample.io/logo.png"}],
       ]
     }
   },
@@ -48,5 +48,6 @@ module.exports = {
       { text: 'About', link: '/about/' },
       { text: 'External', link: 'https://google.com' },
     ]
-  }
+  },
+  ga: 'TEST_ID_20180514'
 }
