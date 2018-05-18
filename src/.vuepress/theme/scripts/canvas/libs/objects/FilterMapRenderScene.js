@@ -98,7 +98,7 @@ export default class FilterMapRenderScene extends Scene {
     const shapeW = this.width*2.0 / number
     const hypo = Math.sqrt(Math.pow(this.width, 2) + Math.pow(this.height, 2))
     this.shapes.forEach((shape, i) => {
-      shape.scale.set(shapeW, hypo)
+      shape.scale.set(shapeW, hypo, 1)
       const posx = i * this.width / number
       const posy = 0
       shape.position.x = posx - this.width / 2
