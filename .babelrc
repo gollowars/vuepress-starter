@@ -4,7 +4,8 @@
       "targets": {
         "browsers": ["ie 10", "safari >= 7"]
       },
-      "useBuiltIns": true
+      "modules": false,
+      "useBuiltIns": false
     }]
   ],
   "plugins": ["syntax-dynamic-import"]

@@ -36,6 +36,8 @@ export default {
       this.$ssrContext.title = this.$title
       this.$ssrContext.lang = this.$lang
       this.$ssrContext.description = this.$page.description || this.$description
+    }else {
+      localStorage.debug = 'app*'
     }
   },
 
@@ -61,7 +63,7 @@ export default {
     nprogress.configure({ showSpinner: false })
 
     this.$router.beforeEach((to, from, next) => {
-      if (to.path !== from.path && !Vue.component(pathToComponentName(to.path))) {
+      if (to.path !== from.path && !Vue.component(to.name)) {
         nprogress.start()
       }
       next()

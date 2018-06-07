@@ -1,8 +1,17 @@
 const path = require('path')
 
+const baseDir = `/`
+
 module.exports = {
-  base: '/',
-  dest: 'dist/',
+  themeConfig: {
+    assetImagePath: `${baseDir}assets/img`,
+    nav: [{
+      text: 'Home',
+      link: '/'
+    }]
+  },
+  base: `${baseDir}`,
+  dest: `dist${baseDir}`,
   locales: {
     '/': {
       lang: 'ja',
@@ -41,13 +50,20 @@ module.exports = {
       .use('pug-plain-loader')
         .loader('pug-plain-loader')
         .end()
-  },
-  themeConfig: {
-    nav: [
-      { text: 'Home', link: '/' },
-      { text: 'About', link: '/about/' },
-      { text: 'External', link: 'https://google.com' },
-    ]
+
+    // glsl
+    config.module
+      .rule('glsl')
+      .test(/\.(glsl|vs|fs|vert|frag)$/)
+      .use('webpack-glsl-loader')
+      .loader('webpack-glsl-loader')
+      .end()
+
+    // svg
+    const svgRule = config.module.rule('svg')
+    svgRule.uses.delete('file-loader')
+    svgRule.use('svg-inline-loader').loader('svg-inline-loader')
+
   },
   ga: 'TEST_ID_20180514'
 }

@@ -1,6 +1,6 @@
 <template lang="pug">
   .home
-    .hero
+    .hero(ref='hero')
       img(v-if="data.heroImage" :src="$withBase(data.heroImage)" alt="hero")
       h1 {{ data.heroText || $title || 'Hello'}}
       p.description {{ data.tagline || $description || 'Welcome to your VuePress site' }}
@@ -10,21 +10,40 @@
 </template>
 
 <script>
+const debug = require('debug')('app:home')
+import { TimelineMax, TweenMax, Power3 } from 'gsap'
 
 export default {
   created () {
-    // console.log('this.$site.themeConfig:',this.$site.themeConfig)
-    console.log(this.$page)
+
+  },
+  mounted () {
+    this.startAnim()
   },
   computed: {
     data () {
       return this.$page.frontmatter
-    },
-    actionLink () {
-      return {
-        link: this.data.actionLink,
-        text: this.data.actionText
-      }
+    }
+  },
+  methods: {
+    startAnim: function(){
+      const animTarget = this.$refs.hero
+      TweenMax.set(animTarget, {
+        css: {
+          opacity: 0,
+          y: 10,
+          scale: 1.1
+        }
+      })
+
+      TweenMax.to(animTarget, 1.0, {
+        css: {
+          opacity: 1.0,
+          y: 0,
+          scale: 1.0
+        },
+        ease: Power3.easeInOut
+      })
     }
   }
 }

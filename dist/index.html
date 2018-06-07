@@ -7,8 +7,8 @@
     <meta name="description" content="Home description">
     
     <meta og:title="og title Home page"><meta og:desciption="og Home description"><meta og:image="//absolute-domain/thisog.jpg">
-    <link rel="preload" href="/assets/css/3.styles.5a2b70ff.css" as="style"><link rel="preload" href="/assets/js/app.110508fe.js" as="script"><link rel="preload" href="/assets/js/1.60f087df.js" as="script"><link rel="prefetch" href="/assets/js/0.e965532b.js"><link rel="prefetch" href="/assets/js/2.9fca50a5.js">
-    <link rel="stylesheet" href="/assets/css/3.styles.5a2b70ff.css">
+    <link rel="preload" href="/assets/css/3.styles.e4164a81.css" as="style"><link rel="preload" href="/assets/js/app.bb4d240d.js" as="script"><link rel="preload" href="/assets/js/1.a6c991d3.js" as="script"><link rel="prefetch" href="/assets/js/0.303fad6f.js"><link rel="prefetch" href="/assets/js/2.6c1b7667.js">
+    <link rel="stylesheet" href="/assets/css/3.styles.e4164a81.css">
   </head>
   <body>
     <div id="app" data-server-rendered="true"><div class="theme-container home-class"><div class="custom-layout"><div class="home"><div class="hero"><!----><h1>Hello VuePress</h1><p class="description">this is a tagline</p></div><div class="content custom"><h1 id="vuepressはコーダーの夢を見るか。"><a href="#vuepressはコーダーの夢を見るか。" aria-hidden="true" class="header-anchor">#</a> VuePressはコーダーの夢を見るか。</h1><p>Webサービス界隈の優秀な人たちが、フロントエンドの新しいツールを「最高！」と日々謳っている中、
@@ -25,8 +25,8 @@ generateコマンドを打って生成されたファイルはリクエストを
 儚い夢であった。</p><h2 id="夢その2-gatsbyjs"><a href="#夢その2-gatsbyjs" aria-hidden="true" class="header-anchor">#</a> 夢その2 Gatsbyjs</h2><p>React製のStatic Generator。こいつは割と本命だった。こいつはStatic Generatorとしてこの世に生を受けたからだ。
 当初はreactのJSXには抵抗があった。jadeやpugで楽を覚えたのに、タグを書いている人間が信じられなかった。pugのローダーがうまく動かん。どれがベストプラクティスなのだ。reduxなんてごついものは僕らにはいらない。...というような理由でvueが本当はよかったのだが、お前しかいないのならそこは目をつぶろうとした。しかし Gatsby buildしてみたらどうだろうか。アセットがrootディレクトリにしっちゃかめっちゃかになる。これを直そうという試みはstackoverflowでもあったがハードコーディングされてるからめんどいという状態だった。Graphqlのコンテンツ管理はよくできていた。だけどここでさようならだ。Goodby Gatsby.Thank you Gatsby. でもおまえはまだGreatではない。（夢をありがとう）</p><h2 id="夢その3-vuepressを使えるレベルにする。"><a href="#夢その3-vuepressを使えるレベルにする。" aria-hidden="true" class="header-anchor">#</a> 夢その3 VuePressを使えるレベルにする。</h2><p>はい。ここからが本題。
 基本的な使い方はまとめてくれている方がいるのでそちらを参考に。
-<a href="https://qiita.com/dojineko/items/aae7e6d13479e08d49fd" target="_blank" rel="noopener noreferrer">VuePress をお試ししてみた</a></p><h3 id="開発のディレクトリ構成をいい感じに"><a href="#開発のディレクトリ構成をいい感じに" aria-hidden="true" class="header-anchor">#</a> 開発のディレクトリ構成をいい感じに</h3><pre class="language-text"><code>yarn add -D vuepress
-</code></pre><pre class="language-text"><code>└── vuepress-starter
+<a href="https://qiita.com/dojineko/items/aae7e6d13479e08d49fd" target="_blank" rel="noopener noreferrer">VuePress をお試ししてみた<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p><h3 id="開発のディレクトリ構成をいい感じに"><a href="#開発のディレクトリ構成をいい感じに" aria-hidden="true" class="header-anchor">#</a> 開発のディレクトリ構成をいい感じに</h3><div class="language- extra-class"><pre class="language-text"><code>yarn add -D vuepress
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>└── vuepress-starter
     ├── .babelrc
     ├── .editorconfig
     ├── .envrc
@@ -48,13 +48,13 @@ generateコマンドを打って生成されたファイルはリクエストを
     │   └── index.md
     ├── yarn-error.log
     └── yarn.lock
-</code></pre><p>はこんな感じ
-package.jsonに</p><pre class="language-text"><code>&quot;scripts&quot;: {
+</code></pre></div><p>はこんな感じ
+package.jsonに</p><div class="language- extra-class"><pre class="language-text"><code>&quot;scripts&quot;: {
     &quot;dev&quot;: &quot;vuepress dev src&quot;,
     &quot;build&quot;: &quot;vuepress build src&quot;
   },
-</code></pre><p>こんな感じでディレクトリを指定しとく
-<a href="https://vuepress.vuejs.org/guide/getting-started.html#inside-an-existing-project" target="_blank" rel="noopener noreferrer">Inside an Existing Project</a></p><p>これは好みだからやらなくても良い。</p><h3 id="metaタグをページ毎に変える。"><a href="#metaタグをページ毎に変える。" aria-hidden="true" class="header-anchor">#</a> metaタグをページ毎に変える。</h3><p>metaタグは下記みたいな感じでグローバルの設定ができる。</p><pre class="language-javascript"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+</code></pre></div><p>こんな感じでディレクトリを指定しとく
+<a href="https://vuepress.vuejs.org/guide/getting-started.html#inside-an-existing-project" target="_blank" rel="noopener noreferrer">Inside an Existing Project<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p><p>これは好みだからやらなくても良い。</p><h3 id="metaタグをページ毎に変える。"><a href="#metaタグをページ毎に変える。" aria-hidden="true" class="header-anchor">#</a> metaタグをページ毎に変える。</h3><p>metaタグは下記みたいな感じでグローバルの設定ができる。</p><div class="language-javascript extra-class"><pre class="language-javascript"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   title<span class="token punctuation">:</span> <span class="token string">'Hello VuePress GLOBAL'</span><span class="token punctuation">,</span>
   description<span class="token punctuation">:</span> <span class="token string">'Just playing around'</span><span class="token punctuation">,</span>
   head<span class="token punctuation">:</span> <span class="token punctuation">[</span>
@@ -67,8 +67,8 @@ package.jsonに</p><pre class="language-text"><code>&quot;scripts&quot;: {
     <span class="token punctuation">[</span><span class="token string">'meta'</span><span class="token punctuation">,</span><span class="token punctuation">{</span> name<span class="token punctuation">:</span><span class="token string">&quot;og:image&quot;</span><span class="token punctuation">,</span> content<span class="token punctuation">:</span><span class="token string">&quot;http://absolute-domain.jp/logo.png&quot;</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
-</code></pre><p>そして個別ページのmetaを変えたいときは
-各ページのfrontmatterに</p><pre class="language-yaml"><code><span class="token punctuation">---</span>
+</code></pre></div><p>そして個別ページのmetaを変えたいときは
+各ページのfrontmatterに</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token punctuation">---</span>
 <span class="token key atrule">title</span><span class="token punctuation">:</span> Home Title
 <span class="token key atrule">description</span><span class="token punctuation">:</span> Home description
 <span class="token key atrule">meta</span><span class="token punctuation">:</span>
@@ -79,20 +79,20 @@ package.jsonに</p><pre class="language-text"><code>&quot;scripts&quot;: {
  <span class="token punctuation">-</span>
   <span class="token key atrule">og:image</span><span class="token punctuation">:</span> <span class="token string">'//absolute-domain/thisog.jpg'</span>
 <span class="token punctuation">---</span>
-</code></pre><p>こんな感じで書いてやると上書きできる！<br>
-(参考:<a href="https://github.com/vuejs/vuepress/blob/8bbc5f30c7d2458ae2e5cb3f67709350e84a179c/lib/build.js" target="_blank" rel="noopener noreferrer">https://github.com/vuejs/vuepress/blob/8bbc5f30c7d2458ae2e5cb3f67709350e84a179c/lib/build.js</a>)<br>
+</code></pre></div><p>こんな感じで書いてやると上書きできる！<br>
+(参考:<a href="https://github.com/vuejs/vuepress/blob/8bbc5f30c7d2458ae2e5cb3f67709350e84a179c/lib/build.js" target="_blank" rel="noopener noreferrer">https://github.com/vuejs/vuepress/blob/8bbc5f30c7d2458ae2e5cb3f67709350e84a179c/lib/build.js<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>)<br>
 SSR後じゃないと反映されない。
 ちなみにページを作りたいときは
-.mdファイルを置いてやれば良い。</p><pre class="language-text"><code>src/sample.md
+.mdファイルを置いてやれば良い。</p><div class="language- extra-class"><pre class="language-text"><code>src/sample.md
 src/about/index.md
-</code></pre><p><a href="/sample.html">src/sample.md</a><br><a href="/about/">src/about/index.md</a></p><h3 id="言語設定を日本語にする。"><a href="#言語設定を日本語にする。" aria-hidden="true" class="header-anchor">#</a> 言語設定を日本語にする。</h3><p>開発のデフォルトのhtmlの言語設定がenになっている。<br>
+</code></pre></div><p><a href="/sample.html">src/sample.md</a><br><a href="/about/">src/about/index.md</a></p><h3 id="言語設定を日本語にする。"><a href="#言語設定を日本語にする。" aria-hidden="true" class="header-anchor">#</a> 言語設定を日本語にする。</h3><p>開発のデフォルトのhtmlの言語設定がenになっている。<br>
 SSR後の言語もデフォルトだとlang=&quot;en-US&quot;になっているので、日本向けの時は変えてやる。
-ページのmdファイルのfrontmatterに</p><pre class="language-yaml"><code><span class="token punctuation">---</span>
+ページのmdファイルのfrontmatterに</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token punctuation">---</span>
 <span class="token key atrule">lang</span><span class="token punctuation">:</span> ja
 <span class="token punctuation">---</span>
-</code></pre><p>を記載するとそのページだけ変わる。(SSR後に反映される。)
+</code></pre></div><p>を記載するとそのページだけ変わる。(SSR後に反映される。)
 すべてのページ追記するのは冗長なので、デフォルトのthemeにはi18nが入っているのでそこの設定をいじる。
-この辺に書いてある   <a href="https://github.com/vuejs/vuepress/blob/2f0da0103dbc952023caffdfdb726f117ca3163d/docs/guide/i18n.md" target="_blank" rel="noopener noreferrer">https://github.com/vuejs/vuepress/blob/2f0da0103dbc952023caffdfdb726f117ca3163d/docs/guide/i18n.md</a></p><pre class="language-javascript"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+この辺に書いてある   <a href="https://github.com/vuejs/vuepress/blob/2f0da0103dbc952023caffdfdb726f117ca3163d/docs/guide/i18n.md" target="_blank" rel="noopener noreferrer">https://github.com/vuejs/vuepress/blob/2f0da0103dbc952023caffdfdb726f117ca3163d/docs/guide/i18n.md<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p><div class="language-javascript extra-class"><pre class="language-javascript"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   base<span class="token punctuation">:</span> <span class="token string">'/'</span><span class="token punctuation">,</span>
   locales<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     <span class="token string">'/'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
@@ -112,13 +112,13 @@ SSR後の言語もデフォルトだとlang=&quot;en-US&quot;になっている�
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token operator">...</span>
 <span class="token punctuation">}</span>
-</code></pre><h3 id="タイトルを変更する。"><a href="#タイトルを変更する。" aria-hidden="true" class="header-anchor">#</a> タイトルを変更する。</h3><p>デフォルトのタイトルが
+</code></pre></div><h3 id="タイトルを変更する。"><a href="#タイトルを変更する。" aria-hidden="true" class="header-anchor">#</a> タイトルを変更する。</h3><p>デフォルトのタイトルが
 <code>$SITE_TITLE | $PAGE_TITLE</code>
 みたいな感じなのでここを変えたい。
 <code>$PAGE_TITLE</code>だけにしたい or <code>$PAGE_TITLE | $SITE_TITLE</code>みたいにしたい場合。
 <code>.vuepress/enhanceApp.js</code>をいじる。</p><p>VuePressはデフォルトでdataMixin.jsを継承してる。
 そのなかにtitleの記述があるのでそれを上書きしてやれば良い。
-<a href="https://github.com/vuejs/vuepress/blob/236224df4cb8424c7e75892c4bea49b2a6cb7cf4/lib/app/dataMixin.js" target="_blank" rel="noopener noreferrer">https://github.com/vuejs/vuepress/blob/236224df4cb8424c7e75892c4bea49b2a6cb7cf4/lib/app/dataMixin.js</a></p><pre class="language-javascript"><code><span class="token keyword">import</span> headerMixin <span class="token keyword">from</span> <span class="token string">'./script/headerMixin'</span>
+<a href="https://github.com/vuejs/vuepress/blob/236224df4cb8424c7e75892c4bea49b2a6cb7cf4/lib/app/dataMixin.js" target="_blank" rel="noopener noreferrer">https://github.com/vuejs/vuepress/blob/236224df4cb8424c7e75892c4bea49b2a6cb7cf4/lib/app/dataMixin.js<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p><div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">import</span> headerMixin <span class="token keyword">from</span> <span class="token string">'./script/headerMixin'</span>
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
   Vue<span class="token punctuation">,</span>
   options<span class="token punctuation">,</span>
@@ -126,7 +126,7 @@ SSR後の言語もデフォルトだとlang=&quot;en-US&quot;になっている�
 <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
   Vue<span class="token punctuation">.</span><span class="token function">mixin</span><span class="token punctuation">(</span>headerMixin<span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-</code></pre><p><code>headerMixin.js</code></p><pre class="language-javascript"><code><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+</code></pre></div><p><code>headerMixin.js</code></p><div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   computed<span class="token punctuation">:</span> <span class="token punctuation">{</span>
@@ -141,16 +141,16 @@ SSR後の言語もデフォルトだとlang=&quot;en-US&quot;になっている�
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre><p>こんな感じにしてやる。</p><h3 id="オリジナルテーマを作る。"><a href="#オリジナルテーマを作る。" aria-hidden="true" class="header-anchor">#</a> オリジナルテーマを作る。</h3><p><a href="https://vuepress.vuejs.org/guide/custom-themes.html#site-and-page-metadata" target="_blank" rel="noopener noreferrer">Custom Themes</a>
-基本的にはここをみるとこからスタート。</p><pre class="language-text"><code>vuepress eject [targetDir]
-</code></pre><p>をすればdefaultのthemeを取得できる
-<a href="https://vuepress.vuejs.org/guide/custom-themes.html#customizing-the-default-theme" target="_blank" rel="noopener noreferrer">Customizing the Default Theme</a></p><pre class="language-text"><code>src/.vuepress/theme
-</code></pre><p>をいじっていく。
+</code></pre></div><p>こんな感じにしてやる。</p><h3 id="オリジナルテーマを作る。"><a href="#オリジナルテーマを作る。" aria-hidden="true" class="header-anchor">#</a> オリジナルテーマを作る。</h3><p><a href="https://vuepress.vuejs.org/guide/custom-themes.html#site-and-page-metadata" target="_blank" rel="noopener noreferrer">Custom Themes<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>
+基本的にはここをみるとこからスタート。</p><div class="language- extra-class"><pre class="language-text"><code>vuepress eject [targetDir]
+</code></pre></div><p>をすればdefaultのthemeを取得できる
+<a href="https://vuepress.vuejs.org/guide/custom-themes.html#customizing-the-default-theme" target="_blank" rel="noopener noreferrer">Customizing the Default Theme<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p><div class="language- extra-class"><pre class="language-text"><code>src/.vuepress/theme
+</code></pre></div><p>をいじっていく。
 src/.vuepress/theme/layout.vue
 がテンプレートファイル</p><h3 id="pugを使う。"><a href="#pugを使う。" aria-hidden="true" class="header-anchor">#</a> pugを使う。</h3><p>普通にpug-loaderをつかえやええのか？とか思ってたが、
-<a href="https://github.com/vuejs/vuepress/issues/146" target="_blank" rel="noopener noreferrer">https://github.com/vuejs/vuepress/issues/146</a>
-ここ見ると<code>pug-plain-loader</code>使ってた。軽いぽい。ということで</p><pre class="language-text"><code>yarn add pug-plain-loader pug -D
-</code></pre><p><code>src/.vuepress/config.js</code></p><pre class="language-javascript"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<a href="https://github.com/vuejs/vuepress/issues/146" target="_blank" rel="noopener noreferrer">https://github.com/vuejs/vuepress/issues/146<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>
+ここ見ると<code>pug-plain-loader</code>使ってた。軽いぽい。ということで</p><div class="language- extra-class"><pre class="language-text"><code>yarn add pug-plain-loader pug -D
+</code></pre></div><p><code>src/.vuepress/config.js</code></p><div class="language-javascript extra-class"><pre class="language-javascript"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   chainWebpack<span class="token punctuation">:</span> config <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
     config<span class="token punctuation">.</span>module
       <span class="token punctuation">.</span><span class="token function">rule</span><span class="token punctuation">(</span><span class="token string">'pug'</span><span class="token punctuation">)</span>
@@ -160,7 +160,7 @@ src/.vuepress/theme/layout.vue
         <span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
-</code></pre><p><code>src/.vuepress/theme/Home.vue</code></p><pre class="language-pug"><code><span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>pug<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span></span>
+</code></pre></div><p><code>src/.vuepress/theme/Home.vue</code></p><div class="language-pug extra-class"><pre class="language-pug"><code><span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>pug<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span></span>
   <span class="token tag">.home</span>
     <span class="token tag">.hero</span>
       <span class="token tag">img<span class="token attributes"><span class="token punctuation">(</span><span class="token attr-name">v-if</span><span class="token punctuation">=</span><span class="token attr-value"><span class="token string">&quot;data.heroImage&quot;</span> <span class="token punctuation">:</span>src<span class="token operator">=</span>&quot;<span class="token function">$withBase</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>heroImage</span><span class="token punctuation">)</span></span></span>&quot; alt<span class="token punctuation">=</span>&quot;hero&quot;)
@@ -176,18 +176,18 @@ src/.vuepress/theme/layout.vue
     <span class="token tag">.footer<span class="token attributes"><span class="token punctuation">(</span><span class="token attr-name">v-if</span><span class="token punctuation">=</span><span class="token attr-value"><span class="token string">&quot;data.footer&quot;</span></span><span class="token punctuation">)</span></span></span> <span class="token plain-text">{{ data.footer }}</span>
 
 <span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span></span>
-</code></pre><p>はい。使えた。</p><h3 id="yamlでコンテンツ管理する。"><a href="#yamlでコンテンツ管理する。" aria-hidden="true" class="header-anchor">#</a> YAMLでコンテンツ管理する。</h3><p>まず、layout.vueをシンプルにしてみる。</p><pre class="language-pug"><code><span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>pug<span class="token punctuation">'</span></span><span class="token punctuation">&gt;</span></span></span>
+</code></pre></div><p>はい。使えた。</p><h3 id="yamlでコンテンツ管理する。"><a href="#yamlでコンテンツ管理する。" aria-hidden="true" class="header-anchor">#</a> YAMLでコンテンツ管理する。</h3><p>まず、layout.vueをシンプルにしてみる。</p><div class="language-pug extra-class"><pre class="language-pug"><code><span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>pug<span class="token punctuation">'</span></span><span class="token punctuation">&gt;</span></span></span>
   <span class="token tag">.theme-container<span class="token attributes"><span class="token punctuation">(</span>:<span class="token attr-name">class</span><span class="token punctuation">=</span><span class="token attr-value"><span class="token string">&quot;pageClasses&quot;</span></span><span class="token punctuation">)</span></span></span>
     <span class="token tag">.custom-layout<span class="token attributes"><span class="token punctuation">(</span><span class="token attr-name">v-if</span><span class="token punctuation">=</span><span class="token attr-value"><span class="token string">&quot;$page.frontmatter.layout&quot;</span></span><span class="token punctuation">)</span></span></span>
       <span class="token tag">component<span class="token attributes"><span class="token punctuation">(</span>:<span class="token attr-name">is</span><span class="token punctuation">=</span><span class="token attr-value"><span class="token string">&quot;$page.frontmatter.layout&quot;</span></span><span class="token punctuation">)</span></span></span>
     <span class="token tag">Home<span class="token attributes"><span class="token punctuation">(</span><span class="token attr-name">v-else-if</span><span class="token punctuation">=</span><span class="token attr-value"><span class="token string">&quot;$page.frontmatter.home&quot;</span></span><span class="token punctuation">)</span></span></span>
     <span class="token tag">Page<span class="token attributes"><span class="token punctuation">(</span><span class="token attr-name">v-else</span><span class="token punctuation">)</span></span></span>
 <span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span></span>
-</code></pre><p>$pageにそのページのmdで記述した変数が入っている。見てもらえばわかるように、
-frontmatterのlayoutで使うテンプレートを指定できるようになっている。</p><pre class="language-yaml"><code><span class="token punctuation">---</span>
+</code></pre></div><p>$pageにそのページのmdで記述した変数が入っている。見てもらえばわかるように、
+frontmatterのlayoutで使うテンプレートを指定できるようになっている。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token punctuation">---</span>
 <span class="token key atrule">layout</span><span class="token punctuation">:</span> home
-</code></pre><p>とすればこのページではHomeコンポーネントを使うように指定できる。こんな感じでページごとにコンポーネントを変えてコーディングしていけば良い。
-そしてfrontmatterにコンテンツの情報を記述していく。</p><pre class="language-yaml"><code><span class="token key atrule">contents</span><span class="token punctuation">:</span>
+</code></pre></div><p>とすればこのページではHomeコンポーネントを使うように指定できる。こんな感じでページごとにコンポーネントを変えてコーディングしていけば良い。
+そしてfrontmatterにコンテンツの情報を記述していく。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">contents</span><span class="token punctuation">:</span>
   <span class="token key atrule">main</span><span class="token punctuation">:</span>
     <span class="token key atrule">title</span><span class="token punctuation">:</span> タイトルだよ
   <span class="token key atrule">slide</span><span class="token punctuation">:</span>
@@ -209,7 +209,7 @@ frontmatterのlayoutで使うテンプレートを指定できるようになっ
       <span class="token key atrule">text</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token punctuation">-</span>
         ここにセクションの文章が入るよ。入るよ。ここにセクションの文章が入るよ。入るよ。ここにセクションの文章が入るよ。入るよ。ここにセクションの文章が入るよ。入るよ。
         ここにセクションの文章が入るよ。入るよ。
-</code></pre><p>そして使いたいコンポーネントで</p><pre class="language-javascript"><code><span class="token operator">&lt;</span>template lang<span class="token operator">=</span><span class="token string">&quot;pug&quot;</span><span class="token operator">&gt;</span>
+</code></pre></div><p>そして使いたいコンポーネントで</p><div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token operator">&lt;</span>template lang<span class="token operator">=</span><span class="token string">&quot;pug&quot;</span><span class="token operator">&gt;</span>
   <span class="token punctuation">.</span>home
     <span class="token function">Main</span><span class="token punctuation">(</span>v<span class="token operator">-</span>bind<span class="token punctuation">:</span>contents<span class="token operator">=</span><span class="token template-string"><span class="token string">`main`</span></span><span class="token punctuation">)</span>
     <span class="token function">Slide</span><span class="token punctuation">(</span>v<span class="token operator">-</span>bind<span class="token punctuation">:</span>contents<span class="token operator">=</span><span class="token template-string"><span class="token string">`slide`</span></span><span class="token punctuation">)</span>
@@ -241,17 +241,17 @@ frontmatterのlayoutで使うテンプレートを指定できるようになっ
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
-</code></pre><p>とかする。</p><h3 id="babelを使う。"><a href="#babelを使う。" aria-hidden="true" class="header-anchor">#</a> Babelを使う。</h3><p>async awaitとか使いたい。polyfillとかいい感じにしたい。
+</code></pre></div><p>とかする。</p><h3 id="babelを使う。"><a href="#babelを使う。" aria-hidden="true" class="header-anchor">#</a> Babelを使う。</h3><p>async awaitとか使いたい。polyfillとかいい感じにしたい。
 しかしながらVuePressはデフォルトだとbabelを使っていないので色々できない。
 VuePressはBubble使っている。これを切ってbabelに切り替える。
-<a href="https://github.com/vuejs/vuepress/issues/124" target="_blank" rel="noopener noreferrer">https://github.com/vuejs/vuepress/issues/124</a></p><pre class="language-text"><code>なんでbubbleなんか使ってるんや？
+<a href="https://github.com/vuejs/vuepress/issues/124" target="_blank" rel="noopener noreferrer">https://github.com/vuejs/vuepress/issues/124<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p><div class="language- extra-class"><pre class="language-text"><code>なんでbubbleなんか使ってるんや？
 Evan Youさん) 軽くて早いからやで
-</code></pre><p>と言っているのでしょうがない。仕事で使う場合は色々対応しなきゃだめなんや。。bubbleさいなら。</p><p>こいつらをinstallする。dynamic-importもdeafult themeには必要。</p><pre class="language-text"><code>&quot;babel-core&quot;: &quot;^6.26.0&quot;,
+</code></pre></div><p>と言っているのでしょうがない。仕事で使う場合は色々対応しなきゃだめなんや。。bubbleさいなら。</p><p>こいつらをinstallする。dynamic-importもdeafult themeには必要。</p><div class="language- extra-class"><pre class="language-text"><code>&quot;babel-core&quot;: &quot;^6.26.0&quot;,
 &quot;babel-loader&quot;: &quot;^7.1.4&quot;,
 &quot;babel-plugin-syntax-dynamic-import&quot;: &quot;^6.18.0&quot;,
 &quot;babel-preset-env&quot;: &quot;^1.6.1&quot;,
-</code></pre><p>.babelrcをrootにおく。
-<code>.babelrc</code></p><pre class="language-javascript"><code><span class="token punctuation">{</span>
+</code></pre></div><p>.babelrcをrootにおく。
+<code>.babelrc</code></p><div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token punctuation">{</span>
   <span class="token string">&quot;presets&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token punctuation">[</span><span class="token string">&quot;env&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
       <span class="token string">&quot;targets&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
@@ -262,34 +262,34 @@ Evan Youさん) 軽くて早いからやで
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token string">&quot;plugins&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;syntax-dynamic-import&quot;</span><span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
-</code></pre><p><code>src/.vuepress/config.js</code></p><pre class="language-javascript"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+</code></pre></div><p><code>src/.vuepress/config.js</code></p><div class="language-javascript extra-class"><pre class="language-javascript"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   chainWebpack<span class="token punctuation">:</span> config <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
     <span class="token keyword">const</span> jsRule <span class="token operator">=</span> config<span class="token punctuation">.</span>module<span class="token punctuation">.</span><span class="token function">rule</span><span class="token punctuation">(</span><span class="token string">'js'</span><span class="token punctuation">)</span>
     jsRule<span class="token punctuation">.</span>uses<span class="token punctuation">.</span><span class="token keyword">delete</span><span class="token punctuation">(</span><span class="token string">'buble-loader'</span><span class="token punctuation">)</span>
     jsRule<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">'babel-loader'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">loader</span><span class="token punctuation">(</span><span class="token string">'babel-loader'</span><span class="token punctuation">)</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre><p>うりゃ。これでOK.</p><p>ちなみに、VuePressは webpack4使ってる。
+</code></pre></div><p>うりゃ。これでOK.</p><p>ちなみに、VuePressは webpack4使ってる。
 CommonsChunkPluginグッバイ
 optimization.splitChunksこんにちは。
 最適化していく時はこの辺見た方が良い。
-<a href="https://qiita.com/soarflat/items/1b5aa7163c087a91877d" target="_blank" rel="noopener noreferrer">https://qiita.com/soarflat/items/1b5aa7163c087a91877d</a></p><p>ちなみにVuePressデフォルトの設定はここ見る。    <a href="https://github.com/vuejs/vuepress/blob/130c5a8468960dfacf788212f9d51f1874e3ca9c/lib/webpack/createBaseConfig.js" target="_blank" rel="noopener noreferrer">https://github.com/vuejs/vuepress/blob/130c5a8468960dfacf788212f9d51f1874e3ca9c/lib/webpack/createBaseConfig.js</a></p><h3 id="ルートディレクトリを指定する"><a href="#ルートディレクトリを指定する" aria-hidden="true" class="header-anchor">#</a> ルートディレクトリを指定する</h3><p>以下のようなディレクトリ配下に制作したファイルを展開しないといけない場合
+<a href="https://qiita.com/soarflat/items/1b5aa7163c087a91877d" target="_blank" rel="noopener noreferrer">https://qiita.com/soarflat/items/1b5aa7163c087a91877d<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p><p>ちなみにVuePressデフォルトの設定はここ見る。    <a href="https://github.com/vuejs/vuepress/blob/130c5a8468960dfacf788212f9d51f1874e3ca9c/lib/webpack/createBaseConfig.js" target="_blank" rel="noopener noreferrer">https://github.com/vuejs/vuepress/blob/130c5a8468960dfacf788212f9d51f1874e3ca9c/lib/webpack/createBaseConfig.js<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p><h3 id="ルートディレクトリを指定する"><a href="#ルートディレクトリを指定する" aria-hidden="true" class="header-anchor">#</a> ルートディレクトリを指定する</h3><p>以下のようなディレクトリ配下に制作したファイルを展開しないといけない場合
 http://sample.io/subdir/
-そういう時には</p><pre class="language-text"><code>module.exports = {
+そういう時には</p><div class="language- extra-class"><pre class="language-text"><code>module.exports = {
   base: `/subdir/`
   dest: `dist/subdir/`,
   ...
 }
-</code></pre><p>などと設定してやれば良い。<br>
-この辺参照<br></p><ul><li><a href="https://vuepress.vuejs.org/guide/assets.html#base-url" target="_blank" rel="noopener noreferrer">Base URL</a></li><li><a href="https://vuepress.vuejs.org/guide/deploy.html#github-pages" target="_blank" rel="noopener noreferrer">GitHub Pages</a></li></ul><p>ちなみにお手軽にbuild後のファイルを確認したいときは</p><pre class="language-text"><code>yarn add http-server
-</code></pre><p>packajsonに以下を追記</p><pre class="language-text"><code>&quot;preview&quot;: &quot;http-server ./dist/&quot;
-</code></pre><pre class="language-text"><code>yarn build
+</code></pre></div><p>などと設定してやれば良い。<br>
+この辺参照<br></p><ul><li><a href="https://vuepress.vuejs.org/guide/assets.html#base-url" target="_blank" rel="noopener noreferrer">Base URL<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li><a href="https://vuepress.vuejs.org/guide/deploy.html#github-pages" target="_blank" rel="noopener noreferrer">GitHub Pages<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul><p>ちなみにお手軽にbuild後のファイルを確認したいときは</p><div class="language- extra-class"><pre class="language-text"><code>yarn add http-server
+</code></pre></div><p>packajsonに以下を追記</p><div class="language- extra-class"><pre class="language-text"><code>&quot;preview&quot;: &quot;http-server ./dist/&quot;
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>yarn build
 yarn preview
-</code></pre><p>で確認したら楽。</p><h3 id="google-analyticsの設定"><a href="#google-analyticsの設定" aria-hidden="true" class="header-anchor">#</a> Google Analyticsの設定</h3><p>デフォルトでGAに対応している。<br><a href="https://vuepress.vuejs.org/config/#ga" target="_blank" rel="noopener noreferrer">ga</a><br>
-configファイルに追記</p><pre class="language-text"><code>ga: 'TEST_ID_20180514'
-</code></pre><p>でいける。
-該当部分はここ<a href="https://github.com/vuejs/vuepress/blob/1bbfa43f0b457d59d6445184f6e7f21713e97869/lib/app/clientEntry.js" target="_blank" rel="noopener noreferrer">vuepress/lib/app/clientEntry.js</a></p><p>build後のソースコード
-app.js</p><pre class="language-javascript"><code><span class="token keyword">function</span><span class="token punctuation">(</span>t<span class="token punctuation">,</span> e<span class="token punctuation">,</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</code></pre></div><p>で確認したら楽。</p><h3 id="google-analyticsの設定"><a href="#google-analyticsの設定" aria-hidden="true" class="header-anchor">#</a> Google Analyticsの設定</h3><p>デフォルトでGAに対応している。<br><a href="https://vuepress.vuejs.org/config/#ga" target="_blank" rel="noopener noreferrer">ga<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a><br>
+configファイルに追記</p><div class="language- extra-class"><pre class="language-text"><code>ga: 'TEST_ID_20180514'
+</code></pre></div><p>でいける。
+該当部分はここ<a href="https://github.com/vuejs/vuepress/blob/1bbfa43f0b457d59d6445184f6e7f21713e97869/lib/app/clientEntry.js" target="_blank" rel="noopener noreferrer">vuepress/lib/app/clientEntry.js<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p><p>build後のソースコード
+app.js</p><div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">function</span><span class="token punctuation">(</span>t<span class="token punctuation">,</span> e<span class="token punctuation">,</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token string">&quot;use strict&quot;</span><span class="token punctuation">;</span>
     <span class="token function">n</span><span class="token punctuation">(</span><span class="token number">247</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">var</span> r<span class="token punctuation">,</span> o<span class="token punctuation">,</span> i<span class="token punctuation">,</span> a<span class="token punctuation">,</span> s<span class="token punctuation">,</span> u<span class="token punctuation">,</span> c <span class="token operator">=</span> <span class="token function">n</span><span class="token punctuation">(</span><span class="token number">243</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -304,10 +304,10 @@ app.js</p><pre class="language-javascript"><code><span class="token keyword">fun
         l<span class="token punctuation">.</span><span class="token function">$mount</span><span class="token punctuation">(</span><span class="token string">&quot;#app&quot;</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span><span class="token punctuation">,</span>
-</code></pre><p>いけてるくさい。</p><h3 id="おまけ"><a href="#おまけ" aria-hidden="true" class="header-anchor">#</a> おまけ</h3><h4 id="vueでグローバルなイベントを作りたい。"><a href="#vueでグローバルなイベントを作りたい。" aria-hidden="true" class="header-anchor">#</a> Vueでグローバルなイベントを作りたい。</h4><p>modalは共通で利用するけど中身だけ置き換えたいみたいなとき。
-enhanceApp.jsで</p><pre class="language-text"><code>Vue.prototype.$eventHub = new Vue()
-</code></pre><p>してやれば、
-modalコンポーネントではこんな感じでイベントを見て</p><pre class="language-text"><code>created () {
+</code></pre></div><p>いけてるくさい。</p><h3 id="おまけ"><a href="#おまけ" aria-hidden="true" class="header-anchor">#</a> おまけ</h3><h4 id="vueでグローバルなイベントを作りたい。"><a href="#vueでグローバルなイベントを作りたい。" aria-hidden="true" class="header-anchor">#</a> Vueでグローバルなイベントを作りたい。</h4><p>modalは共通で利用するけど中身だけ置き換えたいみたいなとき。
+enhanceApp.jsで</p><div class="language- extra-class"><pre class="language-text"><code>Vue.prototype.$eventHub = new Vue()
+</code></pre></div><p>してやれば、
+modalコンポーネントではこんな感じでイベントを見て</p><div class="language- extra-class"><pre class="language-text"><code>created () {
   this.$eventHub.$on('modalOpen',this.open)
 },
 beforeDestroy(){
@@ -319,17 +319,17 @@ methods:{
     this.change(url)
   },
 }
-</code></pre><p>呼び出したいコンポーネントで</p><pre class="language-text"><code>methods: {
+</code></pre></div><p>呼び出したいコンポーネントで</p><div class="language- extra-class"><pre class="language-text"><code>methods: {
   click(url){
     this.$eventHub.$emit('modalOpen',url)
   },
 },
-</code></pre><p>を呼んでやればmodalコンポーネントのopenを発火できる。
-簡単にやりたいときはこのやり方でも良いけど複雑になってきたらvue storeを使った方が良さげぽい。</p><p>参照<br><a href="https://medium.com/vuejobs/create-a-global-event-bus-in-vue-js-838a5d9ab03a" target="_blank" rel="noopener noreferrer">Create a global event bus in Vue.js</a></p><h4 id="アニメーション"><a href="#アニメーション" aria-hidden="true" class="header-anchor">#</a> アニメーション</h4><p>Nuxtですがこちら見ればOK<br><a href="https://qiita.com/SoichiroNitta/items/8d8ce14fc287aa233ae6" target="_blank" rel="noopener noreferrer">Vue.js(Nuxt.js)でアニメーションやってみたら最高だった話。</a></p><h4 id="他に気にすべきこと"><a href="#他に気にすべきこと" aria-hidden="true" class="header-anchor">#</a> 他に気にすべきこと</h4><ul><li>SSRなので使えないライブラリもある。使うライブラリがssr対応しているか確認する。最悪dynamic-importで逃げれる。</li><li>SNSのembed系がめんどい時ある。iframeとか。</li><li>バンバン開発中なんで上記のやり方がすぐ使えなくなるなんてことはもちろんある。</li></ul><br>
+</code></pre></div><p>を呼んでやればmodalコンポーネントのopenを発火できる。
+簡単にやりたいときはこのやり方でも良いけど複雑になってきたらvue storeを使った方が良さげぽい。</p><p>参照<br><a href="https://medium.com/vuejobs/create-a-global-event-bus-in-vue-js-838a5d9ab03a" target="_blank" rel="noopener noreferrer">Create a global event bus in Vue.js<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p><h4 id="アニメーション"><a href="#アニメーション" aria-hidden="true" class="header-anchor">#</a> アニメーション</h4><p>Nuxtですがこちら見ればOK<br><a href="https://qiita.com/SoichiroNitta/items/8d8ce14fc287aa233ae6" target="_blank" rel="noopener noreferrer">Vue.js(Nuxt.js)でアニメーションやってみたら最高だった話。<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p><h4 id="他に気にすべきこと"><a href="#他に気にすべきこと" aria-hidden="true" class="header-anchor">#</a> 他に気にすべきこと</h4><ul><li>SSRなので使えないライブラリもある。使うライブラリがssr対応しているか確認する。最悪dynamic-importで逃げれる。</li><li>SNSのembed系がめんどい時ある。iframeとか。</li><li>バンバン開発中なんで上記のやり方がすぐ使えなくなるなんてことはもちろんある。</li></ul><br>
 てなてな感じ。いけるのかこれ？いけるのかこれ？！感触良いぞVuePress!夢を見せてくれ！<br>
 ※基本的に、僕はVueも素人なので間違ってるところあったらごめんなさい。あとVuePressのバージョンは0.8.4です。バンバンコミットあるので変更すぐあって使えなくなる可能性大です。
-<p><a href="https://github.com/gollowars/vuepress-starter" target="_blank" rel="noopener noreferrer">gollowars/vuepress-starter</a>
+<p><a href="https://github.com/gollowars/vuepress-starter" target="_blank" rel="noopener noreferrer">gollowars/vuepress-starter<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>
 (Notosansいるんで重いです。)</p></div><div class="footer">hear is footer area</div></div></div></div></div>
-    <script src="/assets/js/1.60f087df.js" defer></script><script src="/assets/js/app.110508fe.js" defer></script>
+    <script src="/assets/js/1.a6c991d3.js" defer></script><script src="/assets/js/app.bb4d240d.js" defer></script>
   </body>
 </html>
