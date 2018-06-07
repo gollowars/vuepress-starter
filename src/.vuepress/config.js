@@ -40,9 +40,9 @@ module.exports = {
     }
   },
   chainWebpack: config => {
-    const jsRule = config.module.rule('js')
-    jsRule.uses.delete('buble-loader')
-    jsRule.use('babel-loader').loader('babel-loader')
+    // const jsRule = config.module.rule('js')
+    // jsRule.uses.delete('buble-loader')
+    // jsRule.use('babel-loader').loader('babel-loader')
 
     config.module
       .rule('pug')
