@@ -34,8 +34,10 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
-        '@alias': path.resolve(__dirname,'../assets'),
-        '@fonts': path.resolve(__dirname,'../assets/fonts'),
+        '@alias': path.resolve(__dirname, '../assets'),
+        '@shader': path.resolve(__dirname, './theme/shader'),
+        '@themeScript': path.resolve(__dirname, './theme/scripts'),
+        '@canvas': path.resolve(__dirname, './theme/scripts/canvas')
       }
     }
   },
