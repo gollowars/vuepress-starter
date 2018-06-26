@@ -1,7 +1,7 @@
 # VuePress Starter
 
 ## points
- - transpiler changing to babel
+ <!-- - transpiler changing to babel -->
  - can use async await
  - template engine is pug (pug-plain-loader)
  - simple custom theme
