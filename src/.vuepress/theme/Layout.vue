@@ -1,5 +1,5 @@
 <template lang='pug'>
-  .theme-container(:class="pageClasses")
+  CanvasLayout( :title="this.name")
     .custom-layout(v-if="$page.frontmatter.layout")
       component(:is="$page.frontmatter.layout")
     Home(v-else-if="$page.frontmatter.home")
@@ -10,24 +10,20 @@
 import "babel-polyfill"
 import Vue from 'vue'
 import nprogress from 'nprogress'
+
+// layout
 import Home from './Home.vue'
 import Page from './Page.vue'
+import CanvasLayout from './CanvasLayout.vue'
+
 import { pathToComponentName } from '@app/util'
-import { resolveSidebarItems } from './util'
+import { resolveSidebarItems } from './scripts/util'
 
 export default {
-  components: { Home, Page },
+  components: { Home, Page, CanvasLayout },
   data () {
     return {
-    }
-  },
-
-  computed: {
-    pageClasses() {
-      const userPageClass = this.$page.frontmatter.pageClass
-      return [
-        userPageClass
-      ]
+      name: 'ashikawa'
     }
   },
 

@@ -44,6 +44,8 @@ module.exports = {
     // jsRule.uses.delete('buble-loader')
     // jsRule.use('babel-loader').loader('babel-loader')
 
+    config.output.globalObject('this')
+
     config.module
       .rule('pug')
       .test(/\.pug$/)

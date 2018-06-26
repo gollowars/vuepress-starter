@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vuepress dev src",
     "build": "vuepress build src",
-    "preview": "http-server ./dist/"
+    "preview": "http-server ./dist"
   },
   "author": "gollowars",
   "license": "ISC",
@@ -15,12 +15,22 @@
     "debug": "^3.1.0",
     "gsap": "^2.0.1",
     "http-server": "^0.11.1",
+    "dat-gui": "^0.5.0",
+    "fontfaceobserver": "^2.0.13",
+    "http-server": "^0.11.1",
+    "mobile-detect": "^1.4.1",
+    "node-vibrant": "^3.0.0",
     "pug": "^2.0.3",
     "pug-plain-loader": "^1.0.0",
+    "rxjs": "^6.0.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "svg-inline-loader": "^0.8.0",
     "vuepress": "^0.10.0",
-    "webpack-glsl-loader": "^1.0.1"
+    "three": "^0.92.0",
+    "three-text2d": "^0.4.1",
+    "vuepress": "^0.8.4",
+    "webpack-glsl-loader": "^1.0.1",
+    "worker-loader": "^1.1.1"
   }
 }
