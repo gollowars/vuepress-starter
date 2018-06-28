@@ -2,7 +2,10 @@
 
 ## points
  <!-- - transpiler changing to babel -->
- - can use async await
+ - use Vuex
+ - use babel-polyfill
+ - use svg inline loader
+ - use webpack-glsl-loader
  - template engine is pug (pug-plain-loader)
  - simple custom theme
 
