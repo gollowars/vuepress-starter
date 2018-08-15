@@ -4,7 +4,7 @@ export const endingSlashRE = /\/$/
 export const outboundRE = /^(https?:|mailto:|tel:)/
 
 export function normalize(path) {
-  return path
+  return decodeURI(path)
     .replace(hashRE, '')
     .replace(extRE, '')
 }
@@ -109,10 +109,6 @@ function resolvePath(relative, base, append) {
 }
 
 export function resolveSidebarItems(page, route, site, localePath) {
-  const pageSidebarConfig = page.frontmatter.sidebar
-  if (pageSidebarConfig === 'auto') {
-    return resolveHeaders(page)
-  }
   const {
     pages,
     themeConfig
@@ -121,6 +117,11 @@ export function resolveSidebarItems(page, route, site, localePath) {
   const localeConfig = localePath && themeConfig.locales ?
     themeConfig.locales[localePath] || themeConfig :
     themeConfig
+
+  const pageSidebarConfig = page.frontmatter.sidebar || localeConfig.sidebar || themeConfig.sidebar
+  if (pageSidebarConfig === 'auto') {
+    return resolveHeaders(page)
+  }
 
   const sidebarConfig = localeConfig.sidebar || themeConfig.sidebar
   if (!sidebarConfig) {
@@ -131,7 +132,8 @@ export function resolveSidebarItems(page, route, site, localePath) {
       config
     } = resolveMatchingConfig(route, sidebarConfig)
     return config ?
-      config.map(item => resolveItem(item, pages, base)) : []
+      config.map(item => resolveItem(item, pages, base)) :
+      []
   }
 }
 
