@@ -2,7 +2,7 @@
 
 ## points
  <!-- - transpiler changing to babel -->
- - vuepress version is 0.10.2
+ - vuepress version is 0.14.2
  - use Vuex
  - use babel-polyfill
  - use svg inline loader
