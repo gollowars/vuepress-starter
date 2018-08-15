@@ -1,5 +1,6 @@
 import Vuex from 'vuex'
-import { state, getters, mutations, actions } from './store/store'
+import Responsive from './store/Responsive'
+import Scroll from './store/Scroll'
 
 export default function ({
   Vue,
@@ -8,11 +9,17 @@ export default function ({
   Vue.use(Vuex)
 
   const store = new Vuex.Store({
-    state,
-    getters,
-    mutations,
-    actions
-  })
+    modules: {
+      Responsive: {
+        namespaced: true,
+        ...Responsive
+      },
+      Scroll: {
+        namespaced: true,
+        ...Scroll
+      },
+    }
+   })
   Object.assign(options, {
     store
   })

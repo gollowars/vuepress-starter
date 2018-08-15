@@ -7,6 +7,6 @@ export default ({
   router,
   siteData
 }) => {
-  Vue.mixin(headerMixin)
   createStore({ Vue, options })
+  Vue.mixin(headerMixin)
 }

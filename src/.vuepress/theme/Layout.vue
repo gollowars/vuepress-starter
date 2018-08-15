@@ -15,7 +15,12 @@ import Page from './Page.vue'
 import { pathToComponentName } from '@app/util'
 import { resolveSidebarItems } from './util'
 
+import { mapState, mapActions } from 'vuex'
+import ResponsiveMixin from './mixin/ResponsiveMixin.js'
+
+
 export default {
+  mixins: [ ResponsiveMixin ],
   components: { Home, Page },
   data () {
     return {
@@ -28,7 +33,10 @@ export default {
       return [
         userPageClass
       ]
-    }
+    },
+    ...mapState('Scroll',{
+      scrollAmount: state => state.value
+    }),
   },
 
   created () {
@@ -72,13 +80,41 @@ export default {
     this.$router.afterEach(() => {
       nprogress.done()
     })
+
+    this.addEvent()
   },
 
   beforeDestroy () {
     updateMetaTags(null, this.currentMetaTags)
+    this.removeEvent()
   },
 
   methods: {
+    ...mapActions('Scroll', [
+      'setScrollValue'
+    ]),
+    ...mapActions('Responsive', [
+      'setWinWidth',
+      'setWinHeight',
+    ]),
+    addEvent() {
+      this.windowResizeHandler()
+      window.addEventListener('resize',this.windowResizeHandler)
+      window.addEventListener('scroll',this.windowScrollHandler)
+    },
+    removeEvent() {
+      window.removeEventListener('resize',this.windowResizeHandler)
+      window.removeEventListener('scroll',this.windowScrollHandler)
+    },
+    windowResizeHandler(){
+      this.setWinWidth(window.innerWidth)
+      this.setWinHeight(window.innerHeight)
+      this.mainHeight = `${window.innerHeight}px`
+    },
+    windowScrollHandler(){
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+      this.setScrollValue(scrollTop)
+    }
   }
 }
 

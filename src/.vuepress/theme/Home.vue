@@ -2,47 +2,42 @@
   .home
     .hero(ref='hero')
       h1 {{ data.heroText || $title || 'Hello'}}
-      div
-        span count :
-        span {{ this.$store.state.count }}
-      div
-        span count is :
-        span {{ this.evenOrOdd }}
-      div
-        button(@click=`increment`) inc
-        button(@click=`decrement`) dec
-        button(@click=`incrementIfOdd`) incIfOdd
-        button(@click=`incrementAsync`) incAsync
+      p(v-for=`item in items`) test test test {{item}}
 
 </template>
 
 <script>
 const debug = require('debug')('app:home')
 import { TimelineMax, TweenMax, Power3 } from 'gsap'
-import { mapGetters, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
   created () {
 
   },
   mounted () {
-    console.log(this.$store.state.count)
+  },
+  watch: {
+    scrollAmount(value) {
+      console.log('scrollAmount:',value)
+    }
   },
   computed: {
-    ...mapGetters([
-      'evenOrOdd'
-    ]),
+    ...mapState('Scroll',{
+      scrollAmount: state => state.value
+    }),
     data () {
       return this.$page.frontmatter
     },
+    items(){
+      let items = []
+      for(let i = 0;i<1000; i++){
+        items.push(i)
+      }
+      return items
+    }
   },
   methods: {
-    ...mapActions([
-      'increment',
-      'decrement',
-      'incrementIfOdd',
-      'incrementAsync'
-    ])
   },
 
 }
