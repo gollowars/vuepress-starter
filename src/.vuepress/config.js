@@ -36,6 +36,10 @@ module.exports = {
       alias: {
         '@alias': path.resolve(__dirname,'../assets'),
         '@fonts': path.resolve(__dirname,'../assets/fonts'),
+        '@theme': path.resolve(__dirname,'./theme/'),
+        '@scripts': path.resolve(__dirname,'./theme/scripts/'),
+        '@shader': path.resolve(__dirname,'./theme/shader/'),
+        '@styles': path.resolve(__dirname,'./theme/styles/'),
       }
     }
   },

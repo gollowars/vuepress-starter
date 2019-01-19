@@ -4,7 +4,7 @@ export const endingSlashRE = /\/$/
 export const outboundRE = /^(https?:|mailto:|tel:)/
 
 export function normalize(path) {
-  return decodeURI(path)
+  return path
     .replace(hashRE, '')
     .replace(extRE, '')
 }
@@ -109,6 +109,10 @@ function resolvePath(relative, base, append) {
 }
 
 export function resolveSidebarItems(page, route, site, localePath) {
+  const pageSidebarConfig = page.frontmatter.sidebar
+  if (pageSidebarConfig === 'auto') {
+    return resolveHeaders(page)
+  }
   const {
     pages,
     themeConfig
@@ -117,11 +121,6 @@ export function resolveSidebarItems(page, route, site, localePath) {
   const localeConfig = localePath && themeConfig.locales ?
     themeConfig.locales[localePath] || themeConfig :
     themeConfig
-
-  const pageSidebarConfig = page.frontmatter.sidebar || localeConfig.sidebar || themeConfig.sidebar
-  if (pageSidebarConfig === 'auto') {
-    return resolveHeaders(page)
-  }
 
   const sidebarConfig = localeConfig.sidebar || themeConfig.sidebar
   if (!sidebarConfig) {
@@ -219,4 +218,17 @@ function resolveItem(item, pages, base, isNested) {
       collapsable: item.collapsable !== false
     }
   }
+}
+
+
+
+export function colorOnRGB(rgb) {
+  var red = rgb[0],
+    green = rgb[1],
+    blue = rgb[2];
+  var color = 'black';
+  if ((red * 0.299 + green * 0.587 + blue * 0.114) < 186) {
+    color = 'white';
+  }
+  return color;
 }

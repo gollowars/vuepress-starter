@@ -1,6 +1,7 @@
 import Vuex from 'vuex'
 import Responsive from './store/Responsive'
 import Scroll from './store/Scroll'
+import Common from './store/Common'
 
 export default function ({
   Vue,
@@ -10,6 +11,10 @@ export default function ({
 
   const store = new Vuex.Store({
     modules: {
+      Common: {
+        namespaced: true,
+        ...Common
+      },
       Responsive: {
         namespaced: true,
         ...Responsive

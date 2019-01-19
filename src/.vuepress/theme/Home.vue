@@ -2,7 +2,8 @@
   .home
     .hero(ref='hero')
       h1 {{ data.heroText || $title || 'Hello'}}
-      p(v-for=`item in items`) test test test {{item}}
+      h2 sub title
+      p content content content content content
 
 </template>
 
@@ -29,13 +30,6 @@ export default {
     data () {
       return this.$page.frontmatter
     },
-    items(){
-      let items = []
-      for(let i = 0;i<1000; i++){
-        items.push(i)
-      }
-      return items
-    }
   },
   methods: {
   },
@@ -46,5 +40,11 @@ export default {
 <style lang="stylus">
 @import './styles/config.styl'
 
+
+.home
+  padding 120px 0
+  width 100%
+  max-width $pcSectionWidth
+  margin 0 auto
 
 </style>

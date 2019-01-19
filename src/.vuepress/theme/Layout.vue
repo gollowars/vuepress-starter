@@ -1,27 +1,33 @@
 <template lang='pug'>
   .theme-container(:class="pageClasses")
+    Header
+    Gnav
     .custom-layout(v-if="$page.frontmatter.layout")
       component(:is="$page.frontmatter.layout")
-    Home(v-else-if="$page.frontmatter.home")
-    Page(v-else)
+
 </template>
 
 <script>
 import "babel-polyfill"
 import Vue from 'vue'
 import nprogress from 'nprogress'
+
+// vue components
 import Home from './Home.vue'
 import Page from './Page.vue'
-import { pathToComponentName } from '@app/util'
-import { resolveSidebarItems } from './util'
+import Header from './components/header.vue'
+import Gnav from './components/gnav/Gnav.vue'
 
+// script
+import { pathToComponentName } from '@app/util'
+import { resolveSidebarItems } from './scripts/util'
 import { mapState, mapActions } from 'vuex'
 import ResponsiveMixin from './mixin/ResponsiveMixin.js'
 
 
 export default {
   mixins: [ ResponsiveMixin ],
-  components: { Home, Page },
+  components: { Home, Page, Header, Gnav },
   data () {
     return {
     }
